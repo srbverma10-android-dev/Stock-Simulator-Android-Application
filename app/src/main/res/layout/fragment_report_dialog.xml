@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".report.ReportDialogFragment"
+        android:background="@drawable/white_background_round_corner"
+        android:elevation="@dimen/d_8">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/cancel_button"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:paddingStart="@dimen/d_24"
+                android:paddingTop="@dimen/d_24"
+                android:paddingEnd="@dimen/d_24"
+
+                android:paddingBottom="@dimen/d_24"
+                android:src="@drawable/ic_cancel"
+                app:layout_constraintBottom_toBottomOf="@id/need_help"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                app:layout_constraintTop_toTopOf="@id/need_help"
+                android:contentDescription="@string/content_description"
+                />
+
+            <TextView
+                android:id="@+id/need_help"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="@dimen/d_24"
+                android:layout_marginTop="@dimen/d_24"
+                android:fontFamily="@font/semi_cond_regular"
+                android:text="@string/Need_help"
+                android:textColor="@color/colorPrimary"
+
+                android:textSize="@dimen/s_24"
+                android:textStyle="normal"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/report_a_bug_img"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="@dimen/d_8"
+
+                android:src="@drawable/ic_report_a_bug"
+                app:layout_constraintBottom_toBottomOf="@id/report_a_bug_text_heading"
+                app:layout_constraintStart_toStartOf="@id/need_help"
+                app:layout_constraintTop_toTopOf="@+id/report_a_bug_text_heading"
+                android:contentDescription="@string/content_description"
+                />
+
+            <TextView
+                android:id="@+id/report_a_bug_text_heading"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="@dimen/d_16"
+                android:layout_marginTop="@dimen/d_24"
+                android:layout_marginEnd="@dimen/d_24"
+
+                android:fontFamily="@font/semi_cond_semibold"
+                android:text="@string/Report_a_bug"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/s_20"
+                android:textStyle="normal"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/report_a_bug_img"
+                app:layout_constraintTop_toBottomOf="@+id/need_help" />
+
+
+            <TextView
+                android:id="@+id/report_a_bug_text_body"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="@dimen/d_16"
+                android:layout_marginEnd="@dimen/d_24"
+
+                android:fontFamily="@font/semi_cond_regular"
+                android:text="@string/Report_a_bug_body"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/s_14"
+                android:textStyle="normal"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/report_a_bug_img"
+                app:layout_constraintTop_toBottomOf="@+id/report_a_bug_text_heading" />
+
+            <ImageView
+                android:id="@+id/suggest_an_improvement_img"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="@dimen/d_8"
+
+                android:src="@drawable/ic_suggest_an_improvement"
+
+                app:layout_constraintBottom_toBottomOf="@+id/suggest_an_improvement_text_heading"
+                app:layout_constraintStart_toStartOf="@id/need_help"
+                app:layout_constraintTop_toTopOf="@+id/suggest_an_improvement_text_heading"
+                android:contentDescription="@string/content_description"
+                />
+
+            <TextView
+                android:id="@+id/suggest_an_improvement_text_heading"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="@dimen/d_16"
+                android:layout_marginTop="@dimen/d_8"
+                android:layout_marginEnd="@dimen/d_24"
+
+                android:fontFamily="@font/semi_cond_semibold"
+                android:text="@string/sug_an_improvement"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/s_20"
+                android:textStyle="normal"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/report_a_bug_img"
+                app:layout_constraintTop_toBottomOf="@+id/report_a_bug_text_body" />
+
+            <TextView
+                android:id="@+id/suggest_an_improvement_text_body"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="@dimen/d_16"
+                android:layout_marginEnd="@dimen/d_24"
+
+                android:fontFamily="@font/semi_cond_regular"
+                android:text="@string/sug_an_improvement_body"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/s_14"
+                android:textStyle="normal"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/report_a_bug_img"
+                app:layout_constraintTop_toBottomOf="@+id/suggest_an_improvement_text_heading" />
+
+            <ImageView
+                android:id="@+id/ask_a_question_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="@dimen/d_8"
+
+                android:src="@drawable/ic_ask_a_question"
+
+                app:layout_constraintBottom_toBottomOf="@+id/ask_a_question_text_heading"
+                app:layout_constraintStart_toStartOf="@id/need_help"
+                app:layout_constraintTop_toTopOf="@+id/ask_a_question_text_heading"
+                android:contentDescription="@string/content_description"
+                />
+
+            <TextView
+                android:id="@+id/ask_a_question_text_heading"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="@dimen/d_16"
+                android:layout_marginTop="@dimen/d_8"
+                android:layout_marginEnd="@dimen/d_24"
+
+                android:fontFamily="@font/semi_cond_semibold"
+                android:text="@string/ask_a_question"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/s_20"
+                android:textStyle="normal"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/report_a_bug_img"
+                app:layout_constraintTop_toBottomOf="@+id/suggest_an_improvement_text_body" />
+
+            <TextView
+                android:id="@+id/ask_a_question_text_body"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="@dimen/d_16"
+                android:layout_marginBottom="@dimen/d_24"
+                android:layout_marginEnd="@dimen/d_24"
+
+                android:fontFamily="@font/semi_cond_regular"
+                android:text="@string/ask_a_question_body"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/s_14"
+                android:textStyle="normal"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/report_a_bug_img"
+                app:layout_constraintTop_toBottomOf="@+id/ask_a_question_text_heading" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+
+
+</layout>

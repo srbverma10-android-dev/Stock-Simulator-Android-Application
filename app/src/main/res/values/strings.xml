@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Stock Simulator</string>
+    <string name="content_description">Content Description</string>
+    <string name="Need_help">Need help?</string>
+    <string name="sug_an_improvement">Suggest an improvement</string>
+    <string name="ask_a_question">Ask a question</string>
+    <string name="ask_a_question_body">Help, support or any other queries.</string>
+    <string name="sug_an_improvement_body">New ideas and desired enhancements for this app.</string>
+    <string name="Report_a_bug">Report a bug</string>
+    <string name="Report_a_bug_body">Something in this app is broken or not working as expected.</string>
+
 </resources>
