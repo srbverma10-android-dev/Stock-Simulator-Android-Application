@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "161624545589",
+    "project_id": "stock-simulator-76238",
+    "storage_bucket": "stock-simulator-76238.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:161624545589:android:8834439aaf53ed545dd47c",
+        "android_client_info": {
+          "package_name": "com.sourabhverma.stocksimulator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "161624545589-hrdle4l35topjdt08uqk0ea5vftf7pmh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABKqRUXkC8132T0rDc9B5jK7GZv_pOvEE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "161624545589-hrdle4l35topjdt08uqk0ea5vftf7pmh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
