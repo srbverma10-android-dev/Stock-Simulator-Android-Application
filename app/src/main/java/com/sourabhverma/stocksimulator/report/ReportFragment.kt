@@ -75,6 +75,9 @@ class ReportFragment : BaseFragment<FragmentReportBinding, BaseViewModel>() {
             }
         }
 
+        binding.cancelButton.setOnClickListener {
+            activity?.onBackPressed()
+        }
     }
 
     private fun setTextAccToOptionSelectedByUser() {

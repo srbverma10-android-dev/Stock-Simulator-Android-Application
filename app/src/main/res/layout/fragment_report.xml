@@ -13,8 +13,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cancel_button"
 
-            android:layout_width="@dimen/d_48"
-            android:layout_height="@dimen/d_48"
+            android:layout_width="@dimen/d_40"
+            android:layout_height="@dimen/d_40"
 
             android:padding="@dimen/d_8"
 
