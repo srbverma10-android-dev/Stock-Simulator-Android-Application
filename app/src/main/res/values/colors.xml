@@ -10,5 +10,6 @@
 
     <color name="colorPrimary">#11324D</color>
     <color name="colorSecondary">#6B7AA1</color>
+    <color name="colorSecondaryWith60Alpha">#996B7AA1</color>
 
 </resources>

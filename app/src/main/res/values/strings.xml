@@ -8,5 +8,12 @@
     <string name="sug_an_improvement_body">New ideas and desired enhancements for this app.</string>
     <string name="Report_a_bug">Report a bug</string>
     <string name="Report_a_bug_body">Something in this app is broken or not working as expected.</string>
+    <string name="enter_email_heading">We will contact you soon regarding your experience and feedback when we resolve your issue.</string>
+    <string name="enter_email_hint">Enter your email id…</string>
+    <string name="feedback_hint">Write your feedback/ suggestion/ query here…</string>
+    <string name="feedback_heading">Please as detailed as possible. What did you expect and what happend instead?</string>
+    <string name="screen_shots_text">Screen shots of the application</string>
+    <string name="collecting_steps">To help us fix the problem, your report will include a list of steps to reproduce the issue.</string>
+    <string name="submit">Submit</string>
 
 </resources>

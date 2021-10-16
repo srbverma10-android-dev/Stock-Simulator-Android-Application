@@ -20,18 +20,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
+                android:contentDescription="@string/content_description"
                 android:paddingStart="@dimen/d_24"
                 android:paddingTop="@dimen/d_24"
-                android:paddingEnd="@dimen/d_24"
 
+                android:paddingEnd="@dimen/d_24"
                 android:paddingBottom="@dimen/d_24"
                 android:src="@drawable/ic_cancel"
                 app:layout_constraintBottom_toBottomOf="@id/need_help"
-                app:layout_constraintEnd_toEndOf="parent"
 
-                app:layout_constraintTop_toTopOf="@id/need_help"
-                android:contentDescription="@string/content_description"
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/need_help" />
 
             <TextView
                 android:id="@+id/need_help"
@@ -59,12 +58,11 @@
 
                 android:layout_marginTop="@dimen/d_8"
 
+                android:contentDescription="@string/content_description"
                 android:src="@drawable/ic_report_a_bug"
                 app:layout_constraintBottom_toBottomOf="@id/report_a_bug_text_heading"
                 app:layout_constraintStart_toStartOf="@id/need_help"
-                app:layout_constraintTop_toTopOf="@+id/report_a_bug_text_heading"
-                android:contentDescription="@string/content_description"
-                />
+                app:layout_constraintTop_toTopOf="@+id/report_a_bug_text_heading" />
 
             <TextView
                 android:id="@+id/report_a_bug_text_heading"
@@ -114,13 +112,12 @@
 
                 android:layout_marginTop="@dimen/d_8"
 
-                android:src="@drawable/ic_suggest_an_improvement"
+                android:contentDescription="@string/content_description"
 
+                android:src="@drawable/ic_suggest_an_improvement"
                 app:layout_constraintBottom_toBottomOf="@+id/suggest_an_improvement_text_heading"
                 app:layout_constraintStart_toStartOf="@id/need_help"
-                app:layout_constraintTop_toTopOf="@+id/suggest_an_improvement_text_heading"
-                android:contentDescription="@string/content_description"
-                />
+                app:layout_constraintTop_toTopOf="@+id/suggest_an_improvement_text_heading" />
 
             <TextView
                 android:id="@+id/suggest_an_improvement_text_heading"
@@ -168,13 +165,12 @@
 
                 android:layout_marginTop="@dimen/d_8"
 
-                android:src="@drawable/ic_ask_a_question"
+                android:contentDescription="@string/content_description"
 
+                android:src="@drawable/ic_ask_a_question"
                 app:layout_constraintBottom_toBottomOf="@+id/ask_a_question_text_heading"
                 app:layout_constraintStart_toStartOf="@id/need_help"
-                app:layout_constraintTop_toTopOf="@+id/ask_a_question_text_heading"
-                android:contentDescription="@string/content_description"
-                />
+                app:layout_constraintTop_toTopOf="@+id/ask_a_question_text_heading" />
 
             <TextView
                 android:id="@+id/ask_a_question_text_heading"
@@ -203,8 +199,8 @@
                 android:layout_height="wrap_content"
 
                 android:layout_marginStart="@dimen/d_16"
-                android:layout_marginBottom="@dimen/d_24"
                 android:layout_marginEnd="@dimen/d_24"
+                android:layout_marginBottom="@dimen/d_24"
 
                 android:fontFamily="@font/semi_cond_regular"
                 android:text="@string/ask_a_question_body"
@@ -216,6 +212,57 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/report_a_bug_img"
                 app:layout_constraintTop_toBottomOf="@+id/ask_a_question_text_heading" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_report"
+
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+
+                app:layout_constraintStart_toStartOf="@id/report_a_bug_img"
+                app:layout_constraintEnd_toEndOf="@id/report_a_bug_text_heading"
+                app:layout_constraintTop_toTopOf="@id/report_a_bug_text_heading"
+                app:layout_constraintBottom_toBottomOf="@id/report_a_bug_text_body"
+
+                android:clickable="true"
+                android:focusable="true"
+
+                app:constraint_referenced_ids="report_a_bug_text_heading,report_a_bug_text_body,report_a_bug_img"
+                />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_suggestion"
+
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+
+                app:layout_constraintStart_toStartOf="@id/suggest_an_improvement_img"
+                app:layout_constraintEnd_toEndOf="@id/suggest_an_improvement_text_heading"
+                app:layout_constraintTop_toTopOf="@id/suggest_an_improvement_text_heading"
+                app:layout_constraintBottom_toBottomOf="@id/suggest_an_improvement_text_body"
+
+                android:clickable="true"
+                android:focusable="true"
+
+                app:constraint_referenced_ids="suggest_an_improvement_img,suggest_an_improvement_text_body,suggest_an_improvement_text_heading"
+                />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_question"
+
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+
+                app:layout_constraintStart_toStartOf="@id/ask_a_question_img"
+                app:layout_constraintEnd_toEndOf="@id/ask_a_question_text_heading"
+                app:layout_constraintTop_toTopOf="@id/ask_a_question_text_heading"
+                app:layout_constraintBottom_toBottomOf="@id/ask_a_question_text_body"
+
+                android:clickable="true"
+                android:focusable="true"
+
+                app:constraint_referenced_ids="ask_a_question_img,ask_a_question_text_body,ask_a_question_text_heading"
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>
 

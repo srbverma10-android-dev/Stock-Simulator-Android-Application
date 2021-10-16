@@ -26,8 +26,9 @@ abstract class BaseActivity<T : ViewDataBinding, VM : ViewModel> : AppCompatActi
     private val reportDialogFragment : ReportDialogFragment = ReportDialogFragment()
 
     private val lifecycleEventObserver = LifecycleEventObserver { _, event ->
-        if (event.name == "ON_DESTROY")
+        if (event.name == "ON_DESTROY"){
             isShown = false
+        }
     }
 
     private val sensorEventListener : SensorEventListener = object : SensorEventListener{
@@ -61,12 +62,20 @@ abstract class BaseActivity<T : ViewDataBinding, VM : ViewModel> : AppCompatActi
 
     override fun onResume() {
         super.onResume()
-        sensorManager.registerListener(sensorEventListener, sensor, SensorManager.SENSOR_DELAY_NORMAL)
+        registerSensor()
     }
 
     override fun onPause() {
         super.onPause()
+        unregisterSensor()
+    }
+
+    fun unregisterSensor(){
         sensorManager.unregisterListener(sensorEventListener)
+    }
+
+    fun registerSensor(){
+        sensorManager.registerListener(sensorEventListener, sensor, SensorManager.SENSOR_DELAY_NORMAL)
     }
 
     abstract fun getLayoutId() : Int

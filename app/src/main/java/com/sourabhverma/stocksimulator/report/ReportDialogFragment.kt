@@ -1,5 +1,6 @@
 package com.sourabhverma.stocksimulator.report
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -10,6 +11,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.sourabhverma.stocksimulator.R
 import com.sourabhverma.stocksimulator.databinding.FragmentReportDialogBinding
+import com.sourabhverma.stocksimulator.deep.DeepActivity
+import com.sourabhverma.stocksimulator.utils.CommonUtils
 
 class ReportDialogFragment : DialogFragment(){
     private lateinit var binding : FragmentReportDialogBinding
@@ -22,6 +25,39 @@ class ReportDialogFragment : DialogFragment(){
         dialog?.window?.setDimAmount(0F)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_report_dialog, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        clickListener()
+
+    }
+
+    private fun clickListener() {
+        binding.cancelButton.setOnClickListener {
+            dialog?.dismiss()
+        }
+
+        binding.groupReport.setOnClickListener {
+            dialog?.dismiss()
+            val intentReport = Intent(context, DeepActivity::class.java)
+            intentReport.putExtra(CommonUtils().fromStr, CommonUtils().reportDialogFragmentStr)
+            startActivity(intentReport)
+        }
+
+        binding.groupSuggestion.setOnClickListener {
+            dialog?.dismiss()
+            val intentReport = Intent(context, DeepActivity::class.java)
+            startActivity(intentReport)
+        }
+
+        binding.groupQuestion.setOnClickListener {
+            dialog?.dismiss()
+            val intentReport = Intent(context, DeepActivity::class.java)
+            startActivity(intentReport)
+        }
+
     }
 
 }
