@@ -79,6 +79,8 @@
             app:layout_constraintStart_toStartOf="@id/email_text"
             app:layout_constraintEnd_toEndOf="@id/email_text"
 
+            app:errorEnabled="false"
+
             android:hint="@string/enter_email_hint">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -126,6 +128,8 @@
             app:layout_constraintTop_toBottomOf="@id/feedback_text"
             app:layout_constraintStart_toStartOf="@id/feedback_text"
             app:layout_constraintEnd_toEndOf="@id/feedback_text"
+
+            app:errorEnabled="false"
 
             android:hint="@string/feedback_hint">
 

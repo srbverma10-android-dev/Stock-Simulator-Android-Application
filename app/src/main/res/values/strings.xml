@@ -20,5 +20,7 @@
     <string name="report">report</string>
     <string name="suggestion">suggestion</string>
     <string name="query">query</string>
+    <string name="enter_email_error">Please enter a valid email id</string>
+    <string name="this_can_not_be_null">This section can not be empty…</string>
 
 </resources>
