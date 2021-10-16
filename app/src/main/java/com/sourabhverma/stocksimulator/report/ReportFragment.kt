@@ -5,14 +5,14 @@ import android.view.View
 import androidx.core.widget.doOnTextChanged
 import com.sourabhverma.stocksimulator.R
 import com.sourabhverma.stocksimulator.base.BaseFragment
+import com.sourabhverma.stocksimulator.base.BaseViewModel
 import com.sourabhverma.stocksimulator.databinding.FragmentReportBinding
-import com.sourabhverma.stocksimulator.deep.DeepActivityViewModel
 import com.sourabhverma.stocksimulator.utils.CommonUtils
 
-class ReportFragment : BaseFragment<FragmentReportBinding, DeepActivityViewModel>() {
+class ReportFragment : BaseFragment<FragmentReportBinding, BaseViewModel>() {
     override fun getLayoutId(): Int = R.layout.fragment_report
 
-    override fun getViewModel(): Class<DeepActivityViewModel> = DeepActivityViewModel::class.java
+    override fun getViewModel(): Class<BaseViewModel> = BaseViewModel::class.java
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
