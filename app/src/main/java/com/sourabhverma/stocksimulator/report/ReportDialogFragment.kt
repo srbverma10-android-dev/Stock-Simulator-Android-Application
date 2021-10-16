@@ -43,18 +43,26 @@ class ReportDialogFragment : DialogFragment(){
             dialog?.dismiss()
             val intentReport = Intent(context, DeepActivity::class.java)
             intentReport.putExtra(CommonUtils().fromStr, CommonUtils().reportDialogFragmentStr)
+            intentReport.putExtra(CommonUtils().heading, getString(R.string.report_a_bug_heading))
+            intentReport.putExtra(CommonUtils().type, getString(R.string.report))
             startActivity(intentReport)
         }
 
         binding.groupSuggestion.setOnClickListener {
             dialog?.dismiss()
             val intentReport = Intent(context, DeepActivity::class.java)
+            intentReport.putExtra(CommonUtils().fromStr, CommonUtils().reportDialogFragmentStr)
+            intentReport.putExtra(CommonUtils().heading, getString(R.string.suggest_an_improvement_heading))
+            intentReport.putExtra(CommonUtils().type, getString(R.string.suggestion))
             startActivity(intentReport)
         }
 
         binding.groupQuestion.setOnClickListener {
             dialog?.dismiss()
             val intentReport = Intent(context, DeepActivity::class.java)
+            intentReport.putExtra(CommonUtils().fromStr, CommonUtils().reportDialogFragmentStr)
+            intentReport.putExtra(CommonUtils().heading, getString(R.string.ask_a_question_heading))
+            intentReport.putExtra(CommonUtils().type, getString(R.string.query))
             startActivity(intentReport)
         }
 

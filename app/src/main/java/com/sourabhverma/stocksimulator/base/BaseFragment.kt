@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 abstract class BaseFragment<T : ViewDataBinding, VM : ViewModel> : Fragment() {
 
     private lateinit var viewModel: VM
-    private lateinit var binding: T
+    protected lateinit var binding: T
 
     override fun onCreateView(
         inflater: LayoutInflater,

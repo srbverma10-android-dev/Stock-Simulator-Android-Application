@@ -18,6 +18,9 @@ class DeepActivity : BaseActivity<ActivityDeepBinding, DeepActivityViewModel>() 
 
     private var shouldUnregister = false
 
+    private var type : String = ""
+    private var heading : String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         window.setBackgroundDrawable(null)
         super.onCreate(savedInstanceState)
@@ -31,13 +34,25 @@ class DeepActivity : BaseActivity<ActivityDeepBinding, DeepActivityViewModel>() 
 
     private fun openReportFragment(){
         shouldUnregister=true
+
+        val bundle = Bundle()
+        bundle.putString(CommonUtils().type, type)
+        bundle.putString(CommonUtils().heading, heading)
+
         val reportFragment = ReportFragment()
+        reportFragment.arguments = bundle
         transaction.replace(R.id.frame_layout, reportFragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
 
     private fun getDataFromIntent(intent: Intent) : String{
+        intent.getStringExtra(CommonUtils().type)?.let {
+            type = it
+        }
+        intent.getStringExtra(CommonUtils().heading)?.let {
+            heading = it
+        }
         return try {
             intent.getStringExtra(CommonUtils().fromStr) as String
         } catch (e: Exception) {
@@ -49,7 +64,15 @@ class DeepActivity : BaseActivity<ActivityDeepBinding, DeepActivityViewModel>() 
         super.onResume()
         if (shouldUnregister)
             unregisterSensor()
+        else
+            registerSensor()
     }
+
+    override fun onPause() {
+        super.onPause()
+        unregisterSensor()
+    }
+
 
     override fun onBackPressed() {
         finish()
