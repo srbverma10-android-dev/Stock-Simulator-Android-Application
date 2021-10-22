@@ -22,5 +22,5 @@
     <string name="query">query</string>
     <string name="enter_email_error">Please enter a valid email id</string>
     <string name="this_can_not_be_null">This section can not be empty…</string>
-
+    <string name="write_external_storage">Provide storage access so we can add screenshots.</string>
 </resources>
