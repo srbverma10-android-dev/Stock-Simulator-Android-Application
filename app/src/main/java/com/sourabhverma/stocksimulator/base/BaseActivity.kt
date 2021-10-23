@@ -21,8 +21,6 @@ import com.sourabhverma.stocksimulator.R
 import com.sourabhverma.stocksimulator.report.ReportDialogFragment
 import com.sourabhverma.stocksimulator.utils.CacheHelperClass
 import com.sourabhverma.stocksimulator.utils.CommonUtils
-import java.io.File
-import java.io.FileWriter
 
 abstract class BaseActivity<T : ViewDataBinding, VM : ViewModel> : AppCompatActivity() {
 
@@ -121,29 +119,55 @@ abstract class BaseActivity<T : ViewDataBinding, VM : ViewModel> : AppCompatActi
 
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        writeLog(CommonUtils().lifeCycle, "onCreate-${getFileName()}")
     }
 
     override fun onResume() {
         super.onResume()
         registerSensor()
-        writeLog("LifeCycle", "Resume Base-Activity")
+        writeLog(CommonUtils().lifeCycle, "onResume-${getFileName()}")
     }
 
     override fun onPause() {
         super.onPause()
         unregisterSensor()
+        writeLog(CommonUtils().lifeCycle, "onPause-${getFileName()}")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        writeLog(CommonUtils().lifeCycle, "onStart-${getFileName()}")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        writeLog(CommonUtils().lifeCycle, "onStop-${getFileName()}")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        writeLog(CommonUtils().lifeCycle, "onRestart-${getFileName()}")
+    }
+
+    override fun onDestroy() {
+        writeLog(CommonUtils().lifeCycle, "onDestroy-${getFileName()}")
+        super.onDestroy()
     }
 
     fun unregisterSensor(){
         sensorManager.unregisterListener(sensorEventListener)
+        writeLog(CommonUtils().unregister, "unRegisterSensor-${CommonUtils().register}")
     }
 
     fun registerSensor(){
         sensorManager.registerListener(sensorEventListener, sensor, SensorManager.SENSOR_DELAY_NORMAL)
+        writeLog(CommonUtils().register, "RegisterSensor-${CommonUtils().unregister}")
     }
 
     abstract fun getLayoutId() : Int
 
     abstract fun getViewModel() : Class<VM>
+
+    abstract fun getFileName() : String
 
 }

@@ -14,6 +14,8 @@ class DeepActivity : BaseActivity<ActivityDeepBinding, DeepActivityViewModel>() 
 
     override fun getViewModel(): Class<DeepActivityViewModel> = DeepActivityViewModel::class.java
 
+    override fun getFileName(): String = "DEEP-ACTIVITY"
+
     private val transaction : FragmentTransaction = supportFragmentManager.beginTransaction()
 
     private var shouldUnregister = false

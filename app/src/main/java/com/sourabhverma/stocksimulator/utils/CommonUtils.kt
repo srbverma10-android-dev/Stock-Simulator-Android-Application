@@ -11,6 +11,10 @@ class CommonUtils {
     val reportDialogFragmentStr = "REPORT_DIALOG_FRAGMENT"
     val defaultStr = "DEFAULT"
 
+    val lifeCycle = "LIFE-CYCLE"
+    val register = "SENSOR-REGISTER"
+    val unregister = "SENSOR-UNREGISTER"
+
     val logCsvHeader = "tag,value\n"
 
     fun reportDialogTag() : String{

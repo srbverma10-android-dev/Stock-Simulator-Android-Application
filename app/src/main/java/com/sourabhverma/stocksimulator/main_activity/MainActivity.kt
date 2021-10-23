@@ -12,6 +12,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
 
     override fun getViewModel(): Class<MainActivityViewModel> = MainActivityViewModel::class.java
 
+    override fun getFileName(): String = "MAIN-ACTIVITY"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         CacheHelperClass.resetLogFile(this)
