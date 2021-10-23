@@ -14,6 +14,9 @@ class CommonUtils {
     val lifeCycle = "LIFE-CYCLE"
     val register = "SENSOR-REGISTER"
     val unregister = "SENSOR-UNREGISTER"
+    val screenShot = "SCREEN-SHOT"
+    val reportDialogFragment = "REPORT-DIALOG-FRAGMENT"
+    val permission = "PERMISSION"
 
     val logCsvHeader = "tag,value\n"
 

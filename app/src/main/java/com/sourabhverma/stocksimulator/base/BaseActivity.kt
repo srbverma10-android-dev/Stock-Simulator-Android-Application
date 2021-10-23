@@ -36,6 +36,7 @@ abstract class BaseActivity<T : ViewDataBinding, VM : ViewModel> : AppCompatActi
 
     private val lifecycleEventObserver = LifecycleEventObserver { _, event ->
         if (event.name == "ON_DESTROY"){
+            writeLog(CommonUtils().reportDialogFragment, "${CommonUtils().reportDialogFragment} DESTROY")
             isShown = false
         }
     }
@@ -51,6 +52,7 @@ abstract class BaseActivity<T : ViewDataBinding, VM : ViewModel> : AppCompatActi
             if (x != null && x > 38F && !isShown) {
                 if (checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)){
                     screenShot(window.decorView.rootView)?.let {
+                        writeLog(CommonUtils().screenShot, "${CommonUtils().screenShot} TAKEN PERMISSION-GRANTED")
                         CacheHelperClass.putImage(applicationContext, "ScreenShot",
                             it
                         )
@@ -58,6 +60,7 @@ abstract class BaseActivity<T : ViewDataBinding, VM : ViewModel> : AppCompatActi
                 } else {
                     requestPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 }
+                writeLog(CommonUtils().reportDialogFragment, "${CommonUtils().reportDialogFragment} SHOWN")
                 reportDialogFragment.show(supportFragmentManager, CommonUtils().reportDialogTag())
                 reportDialogFragment.lifecycle.addObserver(lifecycleEventObserver)
                 isShown = true
@@ -79,12 +82,14 @@ abstract class BaseActivity<T : ViewDataBinding, VM : ViewModel> : AppCompatActi
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 0){
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                writeLog(CommonUtils().permission, "${CommonUtils().permission} GRANTED")
                 screenShot(window.decorView.rootView)?.let {
                     CacheHelperClass.putImage(applicationContext, "ScreenShot",
                         it
                     )
                 }
             } else {
+                writeLog(CommonUtils().permission, "${CommonUtils().permission} DENIED")
                 Toast.makeText(applicationContext, getString(R.string.write_external_storage), Toast.LENGTH_SHORT).show()
             }
         }
