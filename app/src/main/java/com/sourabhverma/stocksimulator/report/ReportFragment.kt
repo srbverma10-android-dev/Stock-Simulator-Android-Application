@@ -27,9 +27,11 @@ class ReportFragment : BaseFragment<FragmentReportBinding, BaseViewModel>() {
 
         val screenShotAdapter = ScreenShotAdapter()
         arrayOf(context?.let { CacheHelperClass.getImage(it, "ScreenShot") }).let {
-            screenShotAdapter.setListOfBitmap(
-                it
-            )
+            context?.let { it1 ->
+                screenShotAdapter.setListOfBitmap(
+                    it, it1
+                )
+            }
             if (it[0]!=null){
                 binding.listOfScreenShot.visibility = View.VISIBLE
                 binding.screenShotsText.visibility = View.VISIBLE

@@ -7,9 +7,15 @@ import androidx.recyclerview.widget.RecyclerView
 
 abstract class BaseAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view: View =
-            LayoutInflater.from(parent.context).inflate(getLayoutId(), parent, false)
-        return getViewHolder(view)
+        return if (viewType==0) {
+            val view: View =
+                LayoutInflater.from(parent.context).inflate(getLayoutId()[0], parent, false)
+            getViewHolder(view, viewType)
+        } else {
+            val view: View =
+                LayoutInflater.from(parent.context).inflate(getLayoutId()[1], parent, false)
+            getViewHolder(view, viewType)
+        }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -19,10 +25,15 @@ abstract class BaseAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return itemCount()
     }
 
-    abstract fun getLayoutId() : Int
+    abstract fun getLayoutId() : List<Int>
 
-    abstract fun getViewHolder(view:View) : RecyclerView.ViewHolder
+    abstract fun getViewHolder(view:View, viewType : Int) : RecyclerView.ViewHolder
 
     abstract fun itemCount() : Int
 
+    abstract fun getViewType(position:Int) : Int
+
+    override fun getItemViewType(position: Int): Int {
+        return getViewType(position)
+    }
 }
