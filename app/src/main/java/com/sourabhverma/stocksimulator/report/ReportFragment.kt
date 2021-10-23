@@ -3,10 +3,12 @@ package com.sourabhverma.stocksimulator.report
 import android.os.Bundle
 import android.view.View
 import androidx.core.widget.doOnTextChanged
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.sourabhverma.stocksimulator.R
 import com.sourabhverma.stocksimulator.base.BaseFragment
 import com.sourabhverma.stocksimulator.base.BaseViewModel
 import com.sourabhverma.stocksimulator.databinding.FragmentReportBinding
+import com.sourabhverma.stocksimulator.utils.CacheHelperClass
 import com.sourabhverma.stocksimulator.utils.CommonUtils
 
 class ReportFragment : BaseFragment<FragmentReportBinding, BaseViewModel>() {
@@ -20,6 +22,24 @@ class ReportFragment : BaseFragment<FragmentReportBinding, BaseViewModel>() {
         setTextAccToOptionSelectedByUser()
 
         listeners()
+
+        val screenShotAdapter = ScreenShotAdapter()
+        arrayOf(context?.let { CacheHelperClass.getImage(it, "ScreenShot") }).let {
+            screenShotAdapter.setListOfBitmap(
+                it
+            )
+            if (it[0]!=null){
+                binding.listOfScreenShot.visibility = View.VISIBLE
+                binding.screenShotsText.visibility = View.VISIBLE
+            } else {
+                binding.listOfScreenShot.visibility = View.GONE
+                binding.screenShotsText.visibility = View.GONE
+            }
+        }
+        binding.listOfScreenShot.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = screenShotAdapter
+        }
 
     }
 

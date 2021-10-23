@@ -6,8 +6,8 @@ import android.graphics.BitmapFactory
 import java.io.*
 
 object CacheHelperClass {
-    fun getImage(context: Context, position: Int): Bitmap? {
-        val fileName = context.cacheDir.toString() + "/" + position
+    fun getImage(context: Context, file_name: String): Bitmap? {
+        val fileName = context.cacheDir.toString() + "/" + file_name + ".png"
         val file = File(fileName)
         var bitmap: Bitmap? = null
         try {

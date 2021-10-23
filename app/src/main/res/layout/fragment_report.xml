@@ -3,216 +3,227 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:background="@color/colorPrimary"
-        tools:context=".report.ReportFragment"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cancel_button"
-
-            android:layout_width="@dimen/d_40"
-            android:layout_height="@dimen/d_40"
-
-            android:padding="@dimen/d_8"
-
-            android:background="@drawable/corner_8_secondary_color"
-
-            android:layout_marginTop="@dimen/d_16"
-            android:layout_marginStart="@dimen/d_16"
-
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".report.ReportFragment"
+            android:background="@null"
             >
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cancel_button"
 
-                android:contentDescription="@string/content_description"
+                android:layout_width="@dimen/d_40"
+                android:layout_height="@dimen/d_40"
+
+                android:padding="@dimen/d_8"
+
+                android:background="@drawable/corner_8_secondary_color"
+
+                android:layout_marginTop="@dimen/d_16"
+                android:layout_marginStart="@dimen/d_16"
 
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
 
-                android:background="@drawable/ic_cancel_white"/>
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:contentDescription="@string/content_description"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+
+                    android:background="@drawable/ic_cancel_white"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/email_text"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toBottomOf="@+id/cancel_button"
+                app:layout_constraintStart_toStartOf="@id/cancel_button"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                android:textStyle="normal"
+                android:text="@string/enter_email_heading"
+                android:textColor="@color/white"
+                android:textSize="@dimen/s_16"
+                android:fontFamily="@font/semi_cond_regular"
+
+                android:layout_marginTop="@dimen/d_24"
+                android:layout_marginEnd="@dimen/d_16"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/email_edit_text_layout"
+
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/white"
+                android:textColorHint="@color/white"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="@dimen/d_8"
+
+                app:layout_constraintTop_toBottomOf="@id/email_text"
+                app:layout_constraintStart_toStartOf="@id/email_text"
+                app:layout_constraintEnd_toEndOf="@id/email_text"
+
+                app:errorEnabled="false"
+
+                android:hint="@string/enter_email_hint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:autofillHints="emailAddress"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/feedback_text"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toBottomOf="@+id/email_edit_text_layout"
+                app:layout_constraintStart_toStartOf="@id/cancel_button"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                android:textStyle="normal"
+                android:text="@string/report_a_bug_heading"
+                android:textColor="@color/white"
+                android:textSize="@dimen/s_16"
+                android:fontFamily="@font/semi_cond_regular"
+
+                android:layout_marginTop="@dimen/d_24"
+                android:layout_marginEnd="@dimen/d_16"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/feedback_edit_text_layout"
+
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:hintTextColor="@color/white"
+                android:textColorHint="@color/white"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="@dimen/d_8"
+
+                app:layout_constraintTop_toBottomOf="@id/feedback_text"
+                app:layout_constraintStart_toStartOf="@id/feedback_text"
+                app:layout_constraintEnd_toEndOf="@id/feedback_text"
+
+                app:errorEnabled="false"
+
+                android:hint="@string/feedback_hint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/feedback_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/screen_shots_text"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toBottomOf="@+id/feedback_edit_text_layout"
+                app:layout_constraintStart_toStartOf="@id/cancel_button"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                android:textStyle="normal"
+                android:text="@string/screen_shots_text"
+                android:textColor="@color/white"
+                android:textSize="@dimen/s_16"
+                android:fontFamily="@font/semi_cond_regular"
+
+                android:layout_marginTop="@dimen/d_24"
+                android:layout_marginEnd="@dimen/d_16"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_of_screen_shot"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/screen_shots_text" />
+
+            <TextView
+                android:id="@+id/collecting_steps"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toBottomOf="@+id/list_of_screen_shot"
+                app:layout_constraintStart_toStartOf="@id/cancel_button"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                android:textStyle="normal"
+                android:text="@string/collecting_steps"
+                android:textColor="#B3FFFFFF"
+                android:textSize="@dimen/s_16"
+                android:fontFamily="@font/semi_cond_regular"
+
+                android:layout_marginTop="@dimen/d_16"
+                android:layout_marginEnd="@dimen/d_16"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/submit_Button"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/corner_8_secondary_color"
+
+                android:elevation="@dimen/d_8"
+
+                android:textStyle="normal"
+                android:text="@string/submit"
+                android:fontFamily="@font/semi_cond_regular"
+                android:textColor="@color/white"
+
+                android:layout_marginStart="@dimen/d_8"
+                android:layout_marginEnd="@dimen/d_8"
+                android:layout_marginTop="@dimen/d_24"
+
+                app:layout_constraintStart_toStartOf="@id/collecting_steps"
+                app:layout_constraintEnd_toEndOf="@id/collecting_steps"
+                app:layout_constraintTop_toBottomOf="@id/collecting_steps"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/email_text"
+    </androidx.core.widget.NestedScrollView>
 
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-
-            app:layout_constraintTop_toBottomOf="@+id/cancel_button"
-            app:layout_constraintStart_toStartOf="@id/cancel_button"
-            app:layout_constraintEnd_toEndOf="parent"
-
-            android:textStyle="normal"
-            android:text="@string/enter_email_heading"
-            android:textColor="@color/white"
-            android:textSize="@dimen/s_16"
-            android:fontFamily="@font/semi_cond_regular"
-
-            android:layout_marginTop="@dimen/d_24"
-            android:layout_marginEnd="@dimen/d_16"
-            />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/email_edit_text_layout"
-
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:hintTextColor="@color/white"
-            android:textColorHint="@color/white"
-
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="@dimen/d_8"
-
-            app:layout_constraintTop_toBottomOf="@id/email_text"
-            app:layout_constraintStart_toStartOf="@id/email_text"
-            app:layout_constraintEnd_toEndOf="@id/email_text"
-
-            app:errorEnabled="false"
-
-            android:hint="@string/enter_email_hint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/email_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:autofillHints="emailAddress"
-                />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/feedback_text"
-
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-
-            app:layout_constraintTop_toBottomOf="@+id/email_edit_text_layout"
-            app:layout_constraintStart_toStartOf="@id/cancel_button"
-            app:layout_constraintEnd_toEndOf="parent"
-
-            android:textStyle="normal"
-            android:text="@string/report_a_bug_heading"
-            android:textColor="@color/white"
-            android:textSize="@dimen/s_16"
-            android:fontFamily="@font/semi_cond_regular"
-
-            android:layout_marginTop="@dimen/d_24"
-            android:layout_marginEnd="@dimen/d_16"
-            />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/feedback_edit_text_layout"
-
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:hintTextColor="@color/white"
-            android:textColorHint="@color/white"
-
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="@dimen/d_8"
-
-            app:layout_constraintTop_toBottomOf="@id/feedback_text"
-            app:layout_constraintStart_toStartOf="@id/feedback_text"
-            app:layout_constraintEnd_toEndOf="@id/feedback_text"
-
-            app:errorEnabled="false"
-
-            android:hint="@string/feedback_hint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/feedback_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/screen_shots_text"
-
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-
-            app:layout_constraintTop_toBottomOf="@+id/feedback_edit_text_layout"
-            app:layout_constraintStart_toStartOf="@id/cancel_button"
-            app:layout_constraintEnd_toEndOf="parent"
-
-            android:textStyle="normal"
-            android:text="@string/screen_shots_text"
-            android:textColor="@color/white"
-            android:textSize="@dimen/s_16"
-            android:fontFamily="@font/semi_cond_regular"
-
-            android:layout_marginTop="@dimen/d_24"
-            android:layout_marginEnd="@dimen/d_16"
-            />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list_of_screen_shot"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            app:layout_constraintTop_toBottomOf="@+id/screen_shots_text"
-            />
-
-        <TextView
-            android:id="@+id/collecting_steps"
-
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-
-            app:layout_constraintTop_toBottomOf="@+id/list_of_screen_shot"
-            app:layout_constraintStart_toStartOf="@id/cancel_button"
-            app:layout_constraintEnd_toEndOf="parent"
-
-            android:textStyle="normal"
-            android:text="@string/collecting_steps"
-            android:textColor="#B3FFFFFF"
-            android:textSize="@dimen/s_16"
-            android:fontFamily="@font/semi_cond_regular"
-
-            android:layout_marginTop="@dimen/d_24"
-            android:layout_marginEnd="@dimen/d_16"
-            />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/submit_Button"
-
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-
-            android:background="@drawable/corner_8_secondary_color"
-
-            android:elevation="@dimen/d_8"
-
-            android:textStyle="normal"
-            android:text="@string/submit"
-            android:fontFamily="@font/semi_cond_regular"
-            android:textColor="@color/white"
-
-            android:layout_marginStart="@dimen/d_8"
-            android:layout_marginEnd="@dimen/d_8"
-            android:layout_marginTop="@dimen/d_24"
-
-            app:layout_constraintStart_toStartOf="@id/collecting_steps"
-            app:layout_constraintEnd_toEndOf="@id/collecting_steps"
-            app:layout_constraintTop_toBottomOf="@id/collecting_steps"
-            />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
