@@ -16,6 +16,8 @@ class ReportFragment : BaseFragment<FragmentReportBinding, BaseViewModel>() {
 
     override fun getViewModel(): Class<BaseViewModel> = BaseViewModel::class.java
 
+    override fun getFileName(): String = "REPORT-FRAGMENT"
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -78,6 +80,7 @@ class ReportFragment : BaseFragment<FragmentReportBinding, BaseViewModel>() {
 
 
             } else {
+                writeLog(CommonUtils().showError, "IN:- REPORT-FRAGMENT")
                 if (!CommonUtils().isValidEmail(binding.emailEditText.text.toString())){
                     binding.emailEditTextLayout.isErrorEnabled = true
                     binding.emailEditTextLayout.error = getString(R.string.enter_email_error)
@@ -101,6 +104,7 @@ class ReportFragment : BaseFragment<FragmentReportBinding, BaseViewModel>() {
     }
 
     private fun setTextAccToOptionSelectedByUser() {
+        writeLog(CommonUtils().passedData, "${CommonUtils().passedData} to REPORT-FRAGMENT DATA:- ${arguments?.getString(CommonUtils().type)}")
         binding.feedbackEditTextLayout.hint = getString(R.string.feedback_hint, arguments?.getString(CommonUtils().type))
         binding.feedbackText.text = arguments?.getString(CommonUtils().heading)
     }

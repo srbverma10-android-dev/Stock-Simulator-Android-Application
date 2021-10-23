@@ -18,6 +18,8 @@ class CommonUtils {
     val reportDialogFragment = "REPORT-DIALOG-FRAGMENT"
     val permission = "PERMISSION"
     val onClick = "ON-CLICK"
+    val passedData = "PASSED-DATA"
+    val showError = "SHOW-ERROR"
 
     val logCsvHeader = "tag,value\n"
 
