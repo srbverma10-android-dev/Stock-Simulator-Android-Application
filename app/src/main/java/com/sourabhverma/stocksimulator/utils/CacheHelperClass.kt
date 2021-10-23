@@ -18,6 +18,22 @@ object CacheHelperClass {
         return bitmap
     }
 
+    fun getLogFile(context: Context) : File {
+        val fileName = context.cacheDir.toString() + "/logFile.csv"
+        val file = File(fileName)
+        if (!file.exists()) {
+            file.appendText(CommonUtils().logCsvHeader)
+        }
+        return file
+    }
+
+    fun resetLogFile(context: Context){
+        val fileName = context.cacheDir.toString() + "/logFile.csv"
+        val file = File(fileName)
+        file.writeText("")
+        file.appendText(CommonUtils().logCsvHeader)
+    }
+
     fun putImage(context: Context, file_name: String, bitmap: Bitmap) {
         val fileName = context.cacheDir.toString() + "/" + file_name + ".png"
         val file = File(fileName)

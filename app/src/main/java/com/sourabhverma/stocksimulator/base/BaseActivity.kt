@@ -21,6 +21,8 @@ import com.sourabhverma.stocksimulator.R
 import com.sourabhverma.stocksimulator.report.ReportDialogFragment
 import com.sourabhverma.stocksimulator.utils.CacheHelperClass
 import com.sourabhverma.stocksimulator.utils.CommonUtils
+import java.io.File
+import java.io.FileWriter
 
 abstract class BaseActivity<T : ViewDataBinding, VM : ViewModel> : AppCompatActivity() {
 
@@ -38,6 +40,11 @@ abstract class BaseActivity<T : ViewDataBinding, VM : ViewModel> : AppCompatActi
         if (event.name == "ON_DESTROY"){
             isShown = false
         }
+    }
+
+    fun writeLog(tag : String, value : String){
+        val file = CacheHelperClass.getLogFile(baseContext)
+        file.appendText("$tag,$value\n")
     }
 
     private val sensorEventListener : SensorEventListener = object : SensorEventListener{
@@ -119,6 +126,7 @@ abstract class BaseActivity<T : ViewDataBinding, VM : ViewModel> : AppCompatActi
     override fun onResume() {
         super.onResume()
         registerSensor()
+        writeLog("LifeCycle", "Resume Base-Activity")
     }
 
     override fun onPause() {

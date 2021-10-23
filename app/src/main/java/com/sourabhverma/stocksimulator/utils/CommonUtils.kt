@@ -11,6 +11,8 @@ class CommonUtils {
     val reportDialogFragmentStr = "REPORT_DIALOG_FRAGMENT"
     val defaultStr = "DEFAULT"
 
+    val logCsvHeader = "tag,value\n"
+
     fun reportDialogTag() : String{
         return "REPORT DIALOG STRING PASS"
     }
