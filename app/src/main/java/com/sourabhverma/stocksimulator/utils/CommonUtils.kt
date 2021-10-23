@@ -17,6 +17,7 @@ class CommonUtils {
     val screenShot = "SCREEN-SHOT"
     val reportDialogFragment = "REPORT-DIALOG-FRAGMENT"
     val permission = "PERMISSION"
+    val onClick = "ON-CLICK"
 
     val logCsvHeader = "tag,value\n"
 

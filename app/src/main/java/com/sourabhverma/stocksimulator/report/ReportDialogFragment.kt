@@ -12,6 +12,7 @@ import androidx.fragment.app.DialogFragment
 import com.sourabhverma.stocksimulator.R
 import com.sourabhverma.stocksimulator.databinding.FragmentReportDialogBinding
 import com.sourabhverma.stocksimulator.deep.DeepActivity
+import com.sourabhverma.stocksimulator.utils.CacheHelperClass
 import com.sourabhverma.stocksimulator.utils.CommonUtils
 
 class ReportDialogFragment : DialogFragment(){
@@ -41,6 +42,7 @@ class ReportDialogFragment : DialogFragment(){
 
         binding.groupReport.setOnClickListener {
             dialog?.dismiss()
+            writeLog("${CommonUtils().onClick} REPORT-A-BUG")
             val intentReport = Intent(context, DeepActivity::class.java)
             intentReport.putExtra(CommonUtils().fromStr, CommonUtils().reportDialogFragmentStr)
             intentReport.putExtra(CommonUtils().heading, getString(R.string.report_a_bug_heading))
@@ -50,6 +52,7 @@ class ReportDialogFragment : DialogFragment(){
 
         binding.groupSuggestion.setOnClickListener {
             dialog?.dismiss()
+            writeLog("${CommonUtils().onClick} SUGGEST-AN-IMPROVEMENT")
             val intentReport = Intent(context, DeepActivity::class.java)
             intentReport.putExtra(CommonUtils().fromStr, CommonUtils().reportDialogFragmentStr)
             intentReport.putExtra(CommonUtils().heading, getString(R.string.suggest_an_improvement_heading))
@@ -59,6 +62,7 @@ class ReportDialogFragment : DialogFragment(){
 
         binding.groupQuestion.setOnClickListener {
             dialog?.dismiss()
+            writeLog("${CommonUtils().onClick} ASK-A-QUESTION")
             val intentReport = Intent(context, DeepActivity::class.java)
             intentReport.putExtra(CommonUtils().fromStr, CommonUtils().reportDialogFragmentStr)
             intentReport.putExtra(CommonUtils().heading, getString(R.string.ask_a_question_heading))
@@ -66,6 +70,11 @@ class ReportDialogFragment : DialogFragment(){
             startActivity(intentReport)
         }
 
+    }
+
+    private fun writeLog(value : String){
+        val file = context?.let { CacheHelperClass.getLogFile(it) }
+        file?.appendText("${CommonUtils().onClick},$value\n")
     }
 
 }
