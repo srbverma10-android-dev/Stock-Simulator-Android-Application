@@ -1,6 +1,11 @@
 package com.sourabhverma.stocksimulator.report
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,12 +16,16 @@ import com.sourabhverma.stocksimulator.databinding.FragmentReportBinding
 import com.sourabhverma.stocksimulator.utils.CacheHelperClass
 import com.sourabhverma.stocksimulator.utils.CommonUtils
 
-class ReportFragment : BaseFragment<FragmentReportBinding, BaseViewModel>() {
+
+class ReportFragment : BaseFragment<FragmentReportBinding, BaseViewModel>(), ClickListener {
     override fun getLayoutId(): Int = R.layout.fragment_report
 
     override fun getViewModel(): Class<BaseViewModel> = BaseViewModel::class.java
 
     override fun getFileName(): String = "REPORT-FRAGMENT"
+
+    private var bitmapArray : MutableList<Bitmap?> = mutableListOf()
+    private val screenShotAdapter = ScreenShotAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -25,14 +34,10 @@ class ReportFragment : BaseFragment<FragmentReportBinding, BaseViewModel>() {
 
         listeners()
 
-        val screenShotAdapter = ScreenShotAdapter()
-        arrayOf(context?.let { CacheHelperClass.getImage(it, "ScreenShot") }).let {
-            context?.let { it1 ->
-                screenShotAdapter.setListOfBitmap(
-                    it, it1
-                )
-            }
-            if (it[0]!=null){
+        bitmapArray.add(context?.let { CacheHelperClass.getImage(it, "ScreenShot") })
+        context?.let {
+            screenShotAdapter.setListOfBitmap(bitmapArray, it, this)
+            if (bitmapArray.isNotEmpty() && bitmapArray[0]!=null){
                 binding.listOfScreenShot.visibility = View.VISIBLE
                 binding.screenShotsText.visibility = View.VISIBLE
             } else {
@@ -109,6 +114,28 @@ class ReportFragment : BaseFragment<FragmentReportBinding, BaseViewModel>() {
         writeLog(CommonUtils().passedData, "${CommonUtils().passedData} to REPORT-FRAGMENT DATA:- ${arguments?.getString(CommonUtils().type)}")
         binding.feedbackEditTextLayout.hint = getString(R.string.feedback_hint, arguments?.getString(CommonUtils().type))
         binding.feedbackText.text = arguments?.getString(CommonUtils().heading)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK && requestCode == 11 && data != null){
+            val selectedImage : Uri? = data.data
+            val bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, selectedImage)
+            bitmapArray.add(bitmap)
+            screenShotAdapter.notifyItemInserted(bitmapArray.size-1)
+        }
+    }
+
+    override fun addMoreScreenShot() {
+        val intent = Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(intent, 11)
+    }
+
+    override fun removeThis(position: Int) {
+        if (position < bitmapArray.size) {
+            bitmapArray.removeAt(position)
+            screenShotAdapter.notifyItemRemoved(position)
+        }
     }
 
 }

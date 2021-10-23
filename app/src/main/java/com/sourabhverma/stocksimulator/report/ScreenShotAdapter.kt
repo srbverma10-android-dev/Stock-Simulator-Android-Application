@@ -4,10 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.sourabhverma.stocksimulator.R
@@ -16,12 +14,14 @@ import com.sourabhverma.stocksimulator.base.BaseAdapter
 
 class ScreenShotAdapter : BaseAdapter() {
 
-    private var listOfBitmap : Array<Bitmap?> = emptyArray()
+    private var listOfBitmap : MutableList<Bitmap?> = mutableListOf()
     private lateinit var context: Context
+    private lateinit var listener: ClickListener
 
-    fun setListOfBitmap(bitmapArray: Array<Bitmap?>, context : Context){
+    fun setListOfBitmap(bitmapArray: MutableList<Bitmap?>, context : Context, listener: ClickListener){
         this.listOfBitmap = bitmapArray
         this.context = context
+        this.listener = listener
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -32,9 +32,14 @@ class ScreenShotAdapter : BaseAdapter() {
             val displayMetrics = DisplayMetrics()
             (context as Activity).windowManager.defaultDisplay.getMetrics(displayMetrics)
             layoutParams.dimensionRatio = "${displayMetrics.widthPixels}:${displayMetrics.heightPixels}"
-            Log.d("SOURABHVERMAADAPTER", "onBindViewHolder: in if ${displayMetrics.widthPixels} ${displayMetrics.heightPixels}")
             holder.imageView.layoutParams = layoutParams
             holder.imageView.setImageBitmap(listOfBitmap[position])
+            holder.imageView.setOnClickListener {
+                listener.removeThis(position)
+            }
+            holder.remove.setOnClickListener {
+                listener.removeThis(position)
+            }
         } else {
             holder as AddMoreScreenShot
             val layoutParams = holder.imageView.layoutParams as ConstraintLayout.LayoutParams
@@ -43,7 +48,7 @@ class ScreenShotAdapter : BaseAdapter() {
             layoutParams.dimensionRatio = "${displayMetrics.widthPixels}:${displayMetrics.heightPixels}"
             holder.imageView.layoutParams = layoutParams
             holder.root.setOnClickListener{
-                Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show()
+                listener.addMoreScreenShot()
             }
         }
     }
@@ -70,6 +75,7 @@ class ScreenShotAdapter : BaseAdapter() {
 
     class ScreenShotViewHolder(view: View) : RecyclerView.ViewHolder(view){
         var imageView : ImageView = view.findViewById(R.id.screen_shot)
+        var remove : ImageView = view.findViewById(R.id.remove_screen_shot_button)
     }
 
     class AddMoreScreenShot(view: View) : RecyclerView.ViewHolder(view){

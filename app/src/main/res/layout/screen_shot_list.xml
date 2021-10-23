@@ -3,11 +3,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:elevation="@dimen/d_16"
-
-    android:paddingStart="@dimen/d_16"
-    android:paddingTop="@dimen/d_16"
-
     >
 
     <ImageView
@@ -18,9 +15,28 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/d_200"
 
+        tools:layout_width="150dp"
+        tools:background="@color/black"
+
         android:scaleType="fitXY"
+
+        android:layout_marginTop="@dimen/d_16"
+        android:layout_marginStart="@dimen/d_16"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/remove_screen_shot_button"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toTopOf="@id/screen_shot"
+        app:layout_constraintEnd_toEndOf="@id/screen_shot"
+        app:layout_constraintBottom_toTopOf="@id/screen_shot"
+        app:layout_constraintStart_toEndOf="@id/screen_shot"
+
+        android:background="@drawable/ic_baseline_cancel_24"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
