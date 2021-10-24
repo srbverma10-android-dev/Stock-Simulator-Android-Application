@@ -19,7 +19,7 @@ object CacheHelperClass {
     }
 
     fun getLogFile(context: Context) : File {
-        val fileName = context.cacheDir.toString() + "/logFile.csv"
+        val fileName = context.cacheDir.toString() + "/logCsvFile.csv"
         val file = File(fileName)
         if (!file.exists()) {
             file.appendText(CommonUtils().logCsvHeader)
@@ -28,7 +28,7 @@ object CacheHelperClass {
     }
 
     fun resetLogFile(context: Context){
-        val fileName = context.cacheDir.toString() + "/logFile.csv"
+        val fileName = context.cacheDir.toString() + "/logCsvFile.csv"
         val file = File(fileName)
         file.writeText("")
         file.appendText(CommonUtils().logCsvHeader)

@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sourabhverma.stocksimulator.R
 import com.sourabhverma.stocksimulator.base.BaseAdapter
 
-
 class ScreenShotAdapter : BaseAdapter() {
 
     private var listOfBitmap : MutableList<Bitmap?> = mutableListOf()

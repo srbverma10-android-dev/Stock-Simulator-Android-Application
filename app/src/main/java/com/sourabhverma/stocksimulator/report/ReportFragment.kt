@@ -7,25 +7,27 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sourabhverma.stocksimulator.R
 import com.sourabhverma.stocksimulator.base.BaseFragment
-import com.sourabhverma.stocksimulator.base.BaseViewModel
 import com.sourabhverma.stocksimulator.databinding.FragmentReportBinding
 import com.sourabhverma.stocksimulator.utils.CacheHelperClass
 import com.sourabhverma.stocksimulator.utils.CommonUtils
 
 
-class ReportFragment : BaseFragment<FragmentReportBinding, BaseViewModel>(), ClickListener {
+class ReportFragment : BaseFragment<FragmentReportBinding, ReportViewModel>(), ClickListener {
     override fun getLayoutId(): Int = R.layout.fragment_report
 
-    override fun getViewModel(): Class<BaseViewModel> = BaseViewModel::class.java
+    override fun getViewModel(): Class<ReportViewModel> = ReportViewModel::class.java
 
     override fun getFileName(): String = "REPORT-FRAGMENT"
 
     private var bitmapArray : MutableList<Bitmap?> = mutableListOf()
     private val screenShotAdapter = ScreenShotAdapter()
+
+    private val build = "{\"buildName\":\"Google pixal 4a\"}"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -83,8 +85,14 @@ class ReportFragment : BaseFragment<FragmentReportBinding, BaseViewModel>(), Cli
                     CommonUtils().isValidEmail(binding.emailEditText.text.toString()) && binding.feedbackEditText.text != null &&
                     binding.feedbackEditText.text.toString().isNotBlank() && binding.feedbackEditText.text.toString().isNotEmpty()){
                 //upload data to the server
-
-
+                arguments?.getString(CommonUtils().type)?.let { it1 ->
+                    context?.let { it2 -> CacheHelperClass.getLogFile(it2) }?.let { it3 ->
+                        viewModel.addReport(binding.emailEditText.text.toString(),
+                            it1, binding.feedbackEditText.text.toString(), bitmapArray,
+                            it3, build, requireContext()
+                        )
+                    }
+                }
 
             } else {
                 writeLog(CommonUtils().showError, "IN:- REPORT-FRAGMENT")
@@ -108,6 +116,15 @@ class ReportFragment : BaseFragment<FragmentReportBinding, BaseViewModel>(), Cli
         binding.cancelButton.setOnClickListener {
             activity?.onBackPressed()
         }
+
+        viewModel.getAddReportLiveData().observe(viewLifecycleOwner, {
+            if (it?.code != null && it.code == 201){
+                Toast.makeText(context, "success", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "fail", Toast.LENGTH_SHORT).show()
+            }
+        })
+
     }
 
     private fun setTextAccToOptionSelectedByUser() {

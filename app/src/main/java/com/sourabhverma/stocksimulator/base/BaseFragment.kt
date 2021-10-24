@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.sourabhverma.stocksimulator.utils.CacheHelperClass
@@ -14,7 +15,7 @@ import com.sourabhverma.stocksimulator.utils.CommonUtils
 
 abstract class BaseFragment<T : ViewDataBinding, VM : ViewModel> : Fragment() {
 
-    private lateinit var viewModel: VM
+    protected lateinit var viewModel: VM
     protected lateinit var binding: T
 
     override fun onCreateView(
