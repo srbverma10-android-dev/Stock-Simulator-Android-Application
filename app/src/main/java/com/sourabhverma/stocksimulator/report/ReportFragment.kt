@@ -5,8 +5,10 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.AnimationDrawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.DisplayMetrics
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -14,6 +16,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.sourabhverma.stocksimulator.BuildConfig
 import com.sourabhverma.stocksimulator.R
 import com.sourabhverma.stocksimulator.base.BaseFragment
 import com.sourabhverma.stocksimulator.databinding.FragmentReportBinding
@@ -33,7 +36,7 @@ class ReportFragment : BaseFragment<FragmentReportBinding, ReportViewModel>(), C
     private var bitmapArray : MutableList<Bitmap?> = mutableListOf()
     private val screenShotAdapter = ScreenShotAdapter()
 
-    private val build = "{\"buildName\":\"Google pixal 4a\"}"
+    private lateinit var metrics : DisplayMetrics
 
     private var animationDrawable = AnimationDrawable()
 
@@ -102,6 +105,14 @@ class ReportFragment : BaseFragment<FragmentReportBinding, ReportViewModel>(), C
                             arguments?.getString(CommonUtils().type)?.let { it1 ->
                                 context?.let { it2 -> CacheHelperClass.getLogFile(it2) }?.let { it3 ->
                                     it.isClickable = false
+                                    metrics = resources.displayMetrics
+                                    val build = "{\"BRAND\":\"${Build.BRAND}\"," +
+                                            "\"DEVICE\":\"${Build.DEVICE}\"," +
+                                            "\"DISPLAY\":\"${Build.DISPLAY}\"," +
+                                            "\"DENSITY\":\"${metrics.density}\"," +
+                                            "\"SDK\":\"${Build.VERSION.SDK_INT}\"," +
+                                            "\"VERSION_NAME\":\"${BuildConfig.VERSION_NAME}\"," +
+                                            "\"VERSION_CODE\":\"${BuildConfig.VERSION_CODE}\"}"
                                     viewModel.addReport(binding.emailEditText.text.toString(),
                                         it1, binding.feedbackEditText.text.toString(), bitmapArray,
                                         it3, build, requireContext()
