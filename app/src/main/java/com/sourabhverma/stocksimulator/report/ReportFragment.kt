@@ -156,7 +156,7 @@ class ReportFragment : BaseFragment<FragmentReportBinding, ReportViewModel>(), C
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK && requestCode == 11 && data != null){
+        if (resultCode == RESULT_OK && requestCode == 11 && data != null&& data.data != null){
             val selectedImage : Uri? = data.data
             val bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, selectedImage)
             bitmapArray.add(bitmap)
@@ -165,7 +165,8 @@ class ReportFragment : BaseFragment<FragmentReportBinding, ReportViewModel>(), C
     }
 
     override fun addMoreScreenShot() {
-        val intent = Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        intent.setDataAndType(null,"image/*")
         startActivityForResult(intent, 11)
     }
 

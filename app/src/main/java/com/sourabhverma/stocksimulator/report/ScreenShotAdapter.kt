@@ -34,10 +34,10 @@ class ScreenShotAdapter : BaseAdapter() {
             holder.imageView.layoutParams = layoutParams
             holder.imageView.setImageBitmap(listOfBitmap[position])
             holder.imageView.setOnClickListener {
-                listener.removeThis(position)
+                listener.removeThis(holder.adapterPosition)
             }
             holder.remove.setOnClickListener {
-                listener.removeThis(position)
+                listener.removeThis(holder.adapterPosition)
             }
         } else {
             holder as AddMoreScreenShot
