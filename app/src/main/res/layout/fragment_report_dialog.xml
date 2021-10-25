@@ -6,7 +6,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".report.ReportDialogFragment"
+        tools:context=".report.dialogs.ReportDialogFragment"
         android:background="@drawable/white_background_round_corner"
         android:elevation="@dimen/d_8">
 

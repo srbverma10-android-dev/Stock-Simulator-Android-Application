@@ -18,7 +18,7 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.sourabhverma.stocksimulator.R
-import com.sourabhverma.stocksimulator.report.ReportDialogFragment
+import com.sourabhverma.stocksimulator.report.dialogs.ReportDialogFragment
 import com.sourabhverma.stocksimulator.utils.CacheHelperClass
 import com.sourabhverma.stocksimulator.utils.CommonUtils
 

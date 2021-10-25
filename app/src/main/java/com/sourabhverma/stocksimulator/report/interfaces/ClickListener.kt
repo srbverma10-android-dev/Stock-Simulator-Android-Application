@@ -1,4 +1,4 @@
-package com.sourabhverma.stocksimulator.report
+package com.sourabhverma.stocksimulator.report.interfaces
 
 interface ClickListener {
     fun addMoreScreenShot()

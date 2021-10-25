@@ -17,6 +17,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.sourabhverma.stocksimulator.R
 import com.sourabhverma.stocksimulator.base.BaseFragment
 import com.sourabhverma.stocksimulator.databinding.FragmentReportBinding
+import com.sourabhverma.stocksimulator.report.adapters.ScreenShotAdapter
+import com.sourabhverma.stocksimulator.report.interfaces.ClickListener
 import com.sourabhverma.stocksimulator.utils.CacheHelperClass
 import com.sourabhverma.stocksimulator.utils.CommonUtils
 

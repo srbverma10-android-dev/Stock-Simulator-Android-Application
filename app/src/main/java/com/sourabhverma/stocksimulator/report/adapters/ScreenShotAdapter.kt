@@ -1,4 +1,4 @@
-package com.sourabhverma.stocksimulator.report
+package com.sourabhverma.stocksimulator.report.adapters
 
 import android.app.Activity
 import android.content.Context
@@ -10,6 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.sourabhverma.stocksimulator.R
 import com.sourabhverma.stocksimulator.base.BaseAdapter
+import com.sourabhverma.stocksimulator.report.interfaces.ClickListener
 
 class ScreenShotAdapter : BaseAdapter() {
 

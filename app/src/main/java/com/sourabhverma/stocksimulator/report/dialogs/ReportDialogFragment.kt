@@ -1,4 +1,4 @@
-package com.sourabhverma.stocksimulator.report
+package com.sourabhverma.stocksimulator.report.dialogs
 
 import android.content.Intent
 import android.graphics.Color
