@@ -7,10 +7,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sourabhverma.stocksimulator.R
+import com.google.android.material.snackbar.Snackbar
 import com.sourabhverma.stocksimulator.base.BaseFragment
 import com.sourabhverma.stocksimulator.databinding.FragmentReportBinding
 import com.sourabhverma.stocksimulator.utils.CacheHelperClass
@@ -18,7 +19,7 @@ import com.sourabhverma.stocksimulator.utils.CommonUtils
 
 
 class ReportFragment : BaseFragment<FragmentReportBinding, ReportViewModel>(), ClickListener {
-    override fun getLayoutId(): Int = R.layout.fragment_report
+    override fun getLayoutId(): Int = com.sourabhverma.stocksimulator.R.layout.fragment_report
 
     override fun getViewModel(): Class<ReportViewModel> = ReportViewModel::class.java
 
@@ -59,7 +60,7 @@ class ReportFragment : BaseFragment<FragmentReportBinding, ReportViewModel>(), C
             if (!text.isNullOrEmpty() && text.isNotBlank()) {
                 if (!CommonUtils().isValidEmail(text)){
                     binding.emailEditTextLayout.isErrorEnabled = true
-                    binding.emailEditTextLayout.error = getString(R.string.enter_email_error)
+                    binding.emailEditTextLayout.error = getString(com.sourabhverma.stocksimulator.R.string.enter_email_error)
                 } else {
                     binding.emailEditTextLayout.isErrorEnabled = false
                     binding.emailEditTextLayout.error = null
@@ -73,7 +74,7 @@ class ReportFragment : BaseFragment<FragmentReportBinding, ReportViewModel>(), C
         binding.feedbackEditText.doOnTextChanged { text, _, _, _ ->
             if (text != null && text.isEmpty() && text.isBlank()) {
                 binding.feedbackEditTextLayout.isErrorEnabled = true
-                binding.feedbackEditTextLayout.error = getString(R.string.this_can_not_be_null)
+                binding.feedbackEditTextLayout.error = getString(com.sourabhverma.stocksimulator.R.string.this_can_not_be_null)
             } else {
                 binding.feedbackEditTextLayout.isErrorEnabled = false
                 binding.feedbackEditTextLayout.error = null
@@ -85,12 +86,32 @@ class ReportFragment : BaseFragment<FragmentReportBinding, ReportViewModel>(), C
                     CommonUtils().isValidEmail(binding.emailEditText.text.toString()) && binding.feedbackEditText.text != null &&
                     binding.feedbackEditText.text.toString().isNotBlank() && binding.feedbackEditText.text.toString().isNotEmpty()){
                 //upload data to the server
-                arguments?.getString(CommonUtils().type)?.let { it1 ->
-                    context?.let { it2 -> CacheHelperClass.getLogFile(it2) }?.let { it3 ->
-                        viewModel.addReport(binding.emailEditText.text.toString(),
-                            it1, binding.feedbackEditText.text.toString(), bitmapArray,
-                            it3, build, requireContext()
+                if (CommonUtils().isInternetWorking(requireContext())) {
+                    arguments?.getString(CommonUtils().type)?.let { it1 ->
+                        context?.let { it2 -> CacheHelperClass.getLogFile(it2) }?.let { it3 ->
+                            viewModel.addReport(binding.emailEditText.text.toString(),
+                                it1, binding.feedbackEditText.text.toString(), bitmapArray,
+                                it3, build, requireContext()
+                            )
+                        }
+                    }
+                } else {
+                    view?.let { it1 ->
+                        val snackbar: Snackbar =
+                            Snackbar.make(it1, com.sourabhverma.stocksimulator.R.string.noInternetConnection, Snackbar.LENGTH_SHORT)
+                        val snackbarLayout = snackbar.view
+                        val textView =
+                            snackbarLayout.findViewById<View>(com.sourabhverma.stocksimulator.R.id.snackbar_text) as TextView
+                        textView.setCompoundDrawablesWithIntrinsicBounds(
+                            0,
+                            0,
+                            com.sourabhverma.stocksimulator.R.drawable.ic_baseline_error_outline_24,
+                            0,
                         )
+                        textView.compoundDrawablePadding =
+                            resources.getDimensionPixelOffset(com.sourabhverma.stocksimulator.R.dimen.snackbar_icon_padding)
+                        snackbar.show()
+
                     }
                 }
 
@@ -98,14 +119,14 @@ class ReportFragment : BaseFragment<FragmentReportBinding, ReportViewModel>(), C
                 writeLog(CommonUtils().showError, "IN:- REPORT-FRAGMENT")
                 if (!CommonUtils().isValidEmail(binding.emailEditText.text.toString())){
                     binding.emailEditTextLayout.isErrorEnabled = true
-                    binding.emailEditTextLayout.error = getString(R.string.enter_email_error)
+                    binding.emailEditTextLayout.error = getString(com.sourabhverma.stocksimulator.R.string.enter_email_error)
                 } else {
                     binding.emailEditTextLayout.isErrorEnabled = false
                     binding.emailEditTextLayout.error = null
                 }
                 if (binding.feedbackEditText.text.toString().isEmpty() && binding.feedbackEditText.text.toString().isBlank()){
                     binding.feedbackEditTextLayout.isErrorEnabled = true
-                    binding.feedbackEditTextLayout.error = getString(R.string.this_can_not_be_null)
+                    binding.feedbackEditTextLayout.error = getString(com.sourabhverma.stocksimulator.R.string.this_can_not_be_null)
                 } else {
                     binding.feedbackEditTextLayout.isErrorEnabled = false
                     binding.feedbackEditTextLayout.error = null
@@ -129,7 +150,7 @@ class ReportFragment : BaseFragment<FragmentReportBinding, ReportViewModel>(), C
 
     private fun setTextAccToOptionSelectedByUser() {
         writeLog(CommonUtils().passedData, "${CommonUtils().passedData} to REPORT-FRAGMENT DATA:- ${arguments?.getString(CommonUtils().type)}")
-        binding.feedbackEditTextLayout.hint = getString(R.string.feedback_hint, arguments?.getString(CommonUtils().type))
+        binding.feedbackEditTextLayout.hint = getString(com.sourabhverma.stocksimulator.R.string.feedback_hint, arguments?.getString(CommonUtils().type))
         binding.feedbackText.text = arguments?.getString(CommonUtils().heading)
     }
 

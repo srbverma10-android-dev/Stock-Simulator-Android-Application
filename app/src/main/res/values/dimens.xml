@@ -14,4 +14,6 @@
     <dimen name="s_16">16sp</dimen>
     <dimen name="s_14">14sp</dimen>
 
+    <dimen name="snackbar_icon_padding">36dp</dimen>
+
 </resources>
