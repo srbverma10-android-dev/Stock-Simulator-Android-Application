@@ -26,4 +26,6 @@
     <string name="add_more_images">Add more images from gallery.</string>
     <string name="noInternetConnection">Please check your internet connection…</string>
     <string name="reporting">Reporting</string>
+    <string name="hello_user">Hello, %s</string>
+    <string name="market_is_live">Market is live…</string>
 </resources>
