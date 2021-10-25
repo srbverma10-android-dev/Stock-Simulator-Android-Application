@@ -198,15 +198,19 @@
                 android:layout_marginEnd="@dimen/d_16"
                 />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/submit_Button"
 
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
+                android:foreground="?android:attr/selectableItemBackground"
                 android:background="@drawable/corner_8_secondary_color"
 
                 android:elevation="@dimen/d_8"
+
+                app:iconGravity="textStart"
+                app:iconTint="@null"
 
                 android:textStyle="normal"
                 android:text="@string/submit"

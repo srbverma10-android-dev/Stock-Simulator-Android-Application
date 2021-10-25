@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/drawable/animated_loading_drawable.xml" value="0.18020833333333333" />
         <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/drawable/corner_8_secondary_color.xml" value="0.18020833333333333" />
         <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/drawable/corner_radius_60_alpha_sec_col.xml" value="0.1171875" />
         <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/drawable/custor_edit_text.xml" value="0.19583333333333333" />
@@ -21,7 +22,7 @@
         <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/layout/add_more_screen_shot.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/layout/add_more_screen_shots.xml" value="0.1640625" />
-        <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/layout/fragment_report.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/layout/fragment_report.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/layout/fragment_report_dialog.xml" value="0.22" />
         <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/layout/screen_shot_list.xml" value="0.6" />
       </map>

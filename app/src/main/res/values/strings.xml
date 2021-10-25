@@ -25,4 +25,5 @@
     <string name="write_external_storage">Provide storage access so we can add screenshots.</string>
     <string name="add_more_images">Add more images from gallery.</string>
     <string name="noInternetConnection">Please check your internet connection…</string>
+    <string name="reporting">Reporting</string>
 </resources>
