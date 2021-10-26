@@ -28,4 +28,9 @@
     <string name="reporting">Reporting</string>
     <string name="hello_user">Hello, %s</string>
     <string name="market_is_live">Market is live…</string>
+    <string name="congrats">Congrats…</string>
+    <string name="congrats_text1">Virtual 10,00,000 Rs added to your account.</string>
+    <string name="congrats_text2"> Invest safely</string>
+    <string name="check_most_active_stock">Check Most Active Stocks</string>
+    <string name="something_went_wrong">Something went wrong…</string>
 </resources>

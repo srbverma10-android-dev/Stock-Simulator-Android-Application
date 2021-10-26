@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/corner_8_secondary_color">
+
+        <ImageView
+            android:id="@+id/successCard"
+
+            android:contentDescription="@string/content_description"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/ic_success_card"
+
+            app:layout_constraintTop_toBottomOf="@id/congrats"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            android:layout_marginStart="@dimen/d_16"
+            android:layout_marginBottom="@dimen/d_16"/>
+
+        <TextView
+            android:id="@+id/congrats"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:text="@string/congrats"
+            android:textColor="@color/white"
+            android:textSize="@dimen/s_20"
+            android:fontFamily="@font/semi_cond_regular"
+            android:textAlignment="center"
+            android:gravity="center"
+
+            android:layout_marginTop="@dimen/d_8"
+            android:layout_marginEnd="@dimen/d_16"
+            app:layout_constraintStart_toEndOf="@id/successCard"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+
+        <ImageView
+            android:id="@+id/cancel_button"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toTopOf="@id/congrats"
+            app:layout_constraintBottom_toBottomOf="@id/congrats"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            android:padding="@dimen/d_16"
+
+            android:src="@drawable/ic_cancel_white"/>
+
+        <TextView
+            android:id="@+id/congrats_text"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toBottomOf="@id/cancel_button"
+            app:layout_constraintStart_toEndOf="@id/successCard"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            android:layout_marginStart="@dimen/d_4"
+            android:layout_marginEnd="@dimen/d_16"
+
+            android:text="@string/content_description"
+            android:textColor="@color/white"
+            android:textSize="@dimen/s_16"
+            android:fontFamily="@font/semi_cond_regular"
+            android:textStyle="normal"
+            android:textAlignment="center"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/checkMostActive"
+
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+
+            android:textColor="@color/white"
+
+            android:gravity="bottom"
+
+            app:layout_constraintTop_toBottomOf="@id/congrats_text"
+            app:layout_constraintBottom_toBottomOf="@id/successCard"
+            app:layout_constraintStart_toEndOf="@id/successCard"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            android:layout_marginEnd="@dimen/d_16"
+
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

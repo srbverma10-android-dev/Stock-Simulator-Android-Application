@@ -11,6 +11,7 @@
         <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/drawable/ic_cancel.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/drawable/ic_cancel_white.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/drawable/ic_logo.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/drawable/ic_right_arrow.xml" value="0.1796875" />
         <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/drawable/ic_round_account_circle.xml" value="0.1796875" />
         <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/drawable/ic_round_add_circle_outline_24.xml" value="0.18020833333333333" />
         <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/drawable/ic_transaction.xml" value="0.1796875" />
@@ -21,12 +22,13 @@
         <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/drawable/white_background_round_corner.xml" value="0.18020833333333333" />
         <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/drawable/white_dash_bg_secondary.xml" value="0.18020833333333333" />
         <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/layout/activity_deep.xml" value="0.1640625" />
-        <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/layout/activity_main.xml" value="0.32708333333333334" />
+        <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/layout/add_more_screen_shot.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/layout/add_more_screen_shots.xml" value="0.1640625" />
         <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/layout/fragment_report.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/layout/fragment_report_dialog.xml" value="0.22" />
         <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/layout/screen_shot_list.xml" value="0.6" />
+        <entry key="..\:/Users/KIIT/OneDrive/Desktop/StockSimulator/Stock-Simulator-Android-Application/app/src/main/res/layout/success_card.xml" value="0.13333333333333333" />
       </map>
     </option>
   </component>

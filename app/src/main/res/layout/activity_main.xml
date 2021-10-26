@@ -57,7 +57,6 @@
             android:fontFamily="@font/semi_cond_semibold"
             android:textColor="@color/white"
 
-            app:layout_constraintBottom_toBottomOf="@id/profile_image"
             app:layout_constraintStart_toEndOf="@id/profile_image"
             app:layout_constraintTop_toBottomOf="@id/user_name"
 
@@ -101,6 +100,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/user_name"
             app:layout_constraintBottom_toBottomOf="@id/is_market_live"/>
+
+        <include
+            android:id="@+id/success"
+
+            layout="@layout/success_card"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="@dimen/d_16"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.666"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_image" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
