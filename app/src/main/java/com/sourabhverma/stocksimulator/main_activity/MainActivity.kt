@@ -5,6 +5,7 @@ import com.sourabhverma.stocksimulator.R
 import com.sourabhverma.stocksimulator.base.BaseActivity
 import com.sourabhverma.stocksimulator.databinding.ActivityMainBinding
 import com.sourabhverma.stocksimulator.utils.CacheHelperClass
+import com.sourabhverma.stocksimulator.utils.SharedPrefManager
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() {
 
@@ -18,6 +19,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
         super.onCreate(savedInstanceState)
         CacheHelperClass.resetLogFile(this)
         setTheme(R.style.Theme_StockSimulator)
+        setData()
+    }
+
+    private fun setData() {
+        binding.userName.text = SharedPrefManager().getUsername(this)
     }
 
 }

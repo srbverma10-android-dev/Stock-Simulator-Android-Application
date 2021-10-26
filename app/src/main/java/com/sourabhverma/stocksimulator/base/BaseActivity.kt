@@ -25,7 +25,7 @@ import com.sourabhverma.stocksimulator.utils.CommonUtils
 abstract class BaseActivity<T : ViewDataBinding, VM : ViewModel> : AppCompatActivity() {
 
     private lateinit var viewModel: VM
-    private lateinit var binding: T
+    protected lateinit var binding: T
 
     private lateinit var sensorManager: SensorManager
     private lateinit var sensor: Sensor
