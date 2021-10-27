@@ -13,6 +13,7 @@ class CommonUtils {
     val type = "TEXT_TO_PASS_DEEP_ACTIVITY_TYPE"
     val reportDialogFragmentStr = "REPORT_DIALOG_FRAGMENT"
     val defaultStr = "DEFAULT"
+    val amount = "100000000"
 
     val lifeCycle = "LIFE-CYCLE"
     val register = "SENSOR-REGISTER"
@@ -46,6 +47,24 @@ class CommonUtils {
 
     fun isValidEmail(target: CharSequence): Boolean {
         return !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches()
+    }
+
+    fun change(context: Context): String? {
+        var str = SharedPrefManager().getCurrentAmount(context)
+        return if (str?.length != null) {
+            var formatted = ""
+            if (str.length > 1) {
+                formatted = str.substring(0, 1)
+                str = str.substring(1)
+            }
+            while (str?.length!! > 3) {
+                formatted += "," + str?.substring(0, 2)
+                str = str?.substring(2)
+            }
+            formatted
+        } else {
+            SharedPrefManager().getCurrentAmount(context)
+        }
     }
 
 }

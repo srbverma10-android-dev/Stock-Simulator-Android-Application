@@ -12,6 +12,7 @@ import com.sourabhverma.stocksimulator.R
 import com.sourabhverma.stocksimulator.base.BaseActivity
 import com.sourabhverma.stocksimulator.databinding.ActivityMainBinding
 import com.sourabhverma.stocksimulator.utils.CacheHelperClass
+import com.sourabhverma.stocksimulator.utils.CommonUtils
 import com.sourabhverma.stocksimulator.utils.SharedPrefManager
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() {
@@ -34,7 +35,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
         if (SharedPrefManager().getShouldShowFirstSuccessCard(this)) {
             binding.success.root.visibility = View.VISIBLE
             binding.success.congratsText.text = buildSpannedString {
-                append(getString(R.string.congrats_text1))
+                append(getString(R.string.congrats_text1, CommonUtils().change(this@MainActivity)))
                 bold {
                     append(" ")
                     append(getString(R.string.congrats_text2))
@@ -59,6 +60,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
                     Snackbar.make(binding.root, getString(R.string.something_went_wrong), Snackbar.LENGTH_SHORT).show()
                 }
             }
+            SharedPrefManager().setCurrentAmount(this, CommonUtils().amount)
         } else {
             binding.success.root.visibility = View.GONE
         }
