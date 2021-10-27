@@ -3,6 +3,7 @@ package com.sourabhverma.stocksimulator.main_activity
 import android.os.Bundle
 import android.text.Spannable
 import android.text.style.ImageSpan
+import android.util.Log
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.text.bold
@@ -28,6 +29,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
         CacheHelperClass.resetLogFile(this)
         setTheme(R.style.Theme_StockSimulator)
         setData()
+        getData()
+    }
+
+    private fun getData(){
+        viewModel.getNifty50().observe(this, {
+            if (it != null){
+                Log.d("FINAL_JSON_FROM_NSE", "getData: $it")
+            }
+        })
     }
 
     private fun setData() {
