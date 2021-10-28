@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sourabhverma.stocksimulator.R
 import com.sourabhverma.stocksimulator.base.BaseAdapter
+import com.sourabhverma.stocksimulator.utils.CommonUtils
 import org.json.JSONArray
 
 class NiftyAdapter : BaseAdapter() {
@@ -21,7 +22,12 @@ class NiftyAdapter : BaseAdapter() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
         holder as NiftyViewHolder
-        holder.textview.text = listOfData.getJSONObject(position).getString("index")
+        holder.indexName.text = listOfData.getJSONObject(position).getString("index")
+        holder.currentVal.text = CommonUtils().changeToAmtIntWithRsIcon(listOfData.getJSONObject(position).getString("last"))
+        val change = listOfData.getJSONObject(position).getString("percentChange") + "%"
+        holder.changeVal.text = change
+        holder.highVal.text = CommonUtils().changeToAmtIntWithRsIcon(listOfData.getJSONObject(position).getString("high"))
+        holder.lowVal.text = CommonUtils().changeToAmtIntWithRsIcon(listOfData.getJSONObject(position).getString("low"))
     }
     
     override fun getLayoutId(): List<Int> = listOf(R.layout.nifty_adapter)
@@ -37,6 +43,10 @@ class NiftyAdapter : BaseAdapter() {
     }
 
     class NiftyViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        var textview : TextView = view.findViewById(R.id.textlayout)
+        var indexName : TextView = view.findViewById(R.id.index_name)
+        var changeVal : TextView = view.findViewById(R.id.change_val)
+        var highVal : TextView = view.findViewById(R.id.high_val)
+        var lowVal : TextView = view.findViewById(R.id.low_val)
+        var currentVal : TextView = view.findViewById(R.id.current_val)
     }
 }

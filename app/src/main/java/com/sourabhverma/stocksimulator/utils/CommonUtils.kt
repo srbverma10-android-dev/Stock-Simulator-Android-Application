@@ -49,7 +49,21 @@ class CommonUtils {
         return !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches()
     }
 
-    fun change(context: Context): String? {
+    fun changeToAmtIntWithRsIcon(string: String) : String {
+        var str = string
+        var formatted = "₹ "
+        if (str.length > 1) {
+            formatted = "₹ " + str.substring(0, 1)
+            str = str.substring(1)
+        }
+        while (str.length > 3) {
+            formatted += "," + str.substring(0, 2)
+            str = str.substring(2)
+        }
+        return formatted
+    }
+
+    fun changeToAmtInt(context: Context): String? {
         var str = SharedPrefManager().getCurrentAmount(context)
         return if (str?.length != null) {
             var formatted = ""

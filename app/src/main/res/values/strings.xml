@@ -33,4 +33,9 @@
     <string name="congrats_text2"> Invest safely</string>
     <string name="check_most_active_stock">Check Most Active Stocks</string>
     <string name="something_went_wrong">Something went wrong…</string>
+    <string name="details">Details</string>
+    <string name="current">Current : </string>
+    <string name="change_text">Change : </string>
+    <string name="high">High : </string>
+    <string name="low">Low : </string>
 </resources>
