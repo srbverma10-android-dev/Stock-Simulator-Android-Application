@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sourabhverma.stocksimulator.R
 import com.sourabhverma.stocksimulator.base.BaseAdapter
+import com.sourabhverma.stocksimulator.ui.LineChart
 import com.sourabhverma.stocksimulator.utils.CommonUtils
 import org.json.JSONArray
 
@@ -28,6 +29,7 @@ class NiftyAdapter : BaseAdapter() {
         holder.changeVal.text = change
         holder.highVal.text = CommonUtils().changeToAmtIntWithRsIcon(listOfData.getJSONObject(position).getString("high"))
         holder.lowVal.text = CommonUtils().changeToAmtIntWithRsIcon(listOfData.getJSONObject(position).getString("low"))
+        holder.lineChart.setJson(CommonUtils().returnJsonArray())
     }
     
     override fun getLayoutId(): List<Int> = listOf(R.layout.nifty_adapter)
@@ -48,5 +50,6 @@ class NiftyAdapter : BaseAdapter() {
         var highVal : TextView = view.findViewById(R.id.high_val)
         var lowVal : TextView = view.findViewById(R.id.low_val)
         var currentVal : TextView = view.findViewById(R.id.current_val)
+        var lineChart : LineChart = view.findViewById(R.id.lineChart)
     }
 }

@@ -218,6 +218,17 @@
 
     </LinearLayout>
 
+    <com.sourabhverma.stocksimulator.ui.LineChart
+        android:id="@+id/lineChart"
+
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+
+        android:layout_marginTop="@dimen/d_8"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linear_layout_2"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

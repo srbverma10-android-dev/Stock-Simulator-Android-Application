@@ -7,17 +7,17 @@ import org.json.JSONObject
 class MainActivityViewModel : BaseViewModel(){
     private val repo : MainActivityRepo = MainActivityRepo()
 
-    private var getNifty50 : MutableLiveData<JSONObject> = MutableLiveData()
+    private var getIndices : MutableLiveData<JSONObject> = MutableLiveData()
 
-    fun getNifty50() : MutableLiveData<JSONObject>{
-        repo.getNifty50 {
+    fun getIndices() : MutableLiveData<JSONObject>{
+        repo.getIndices {
             if (it != null){
-                getNifty50.postValue(it)
+                getIndices.postValue(it)
             } else {
-                getNifty50.postValue(null)
+                getIndices.postValue(null)
             }
         }
-        return getNifty50
+        return getIndices
     }
 
 }

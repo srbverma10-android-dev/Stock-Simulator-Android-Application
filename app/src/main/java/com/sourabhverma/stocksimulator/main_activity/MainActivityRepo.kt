@@ -1,5 +1,6 @@
 package com.sourabhverma.stocksimulator.main_activity
 
+import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import org.json.JSONArray
@@ -24,8 +25,15 @@ class MainActivityRepo {
             val url = URL(u)
             val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
             conn.requestMethod = "GET"
-            conn.connectTimeout = 3000
-            conn.readTimeout = 3000
+            conn.connectTimeout = 30000
+            conn.readTimeout = 30000
+            val headers: MutableMap<String, String> = HashMap()
+            headers["X-CSRF-Token"] = "fetch"
+            headers["content-type"] = "application/json"
+            headers["user-agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+            for (headerKey in headers.keys) {
+                conn.setRequestProperty(headerKey, headers[headerKey])
+            }
             val rc = conn.responseCode
             if (rc != HttpURLConnection.HTTP_OK) {
                 throw Exception("Error: $rc")
@@ -35,7 +43,7 @@ class MainActivityRepo {
         })
     }
 
-    fun getNifty50(onResult: (JSONObject?)->Unit){
+    fun getIndices(onResult: (JSONObject?)->Unit){
         createHttpTask(allIndUrl)
             .addOnSuccessListener {
                 val json = JSONObject(it)
@@ -56,9 +64,11 @@ class MainActivityRepo {
                 }
                 json.remove("data")
                 json.put("data", jsonArray)
+                Log.d("REPOERROR", "getNifty50: success :- $json")
                 onResult(json)
             }
             .addOnFailureListener {
+                Log.d("REPOERROR", "getNifty50: error :- $it")
                 onResult(null)
             }
     }

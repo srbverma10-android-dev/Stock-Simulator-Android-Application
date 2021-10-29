@@ -3,8 +3,8 @@ package com.sourabhverma.stocksimulator.main_activity
 import android.os.Bundle
 import android.text.Spannable
 import android.text.style.ImageSpan
-import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
@@ -49,11 +49,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
     }
 
     private fun getData(){
-        viewModel.getNifty50().observe(this, {
+        viewModel.getIndices().observe(this, {
             if (it != null){
-                Log.d("JSONOBJECT", "getData: $it")
                 niftyAdapter.setData(it.getJSONArray("data"), this)
                 niftyAdapter.notifyItemRangeInserted(0, it.getJSONArray("data").length()-1)
+            } else {
+                Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show()
             }
         })
     }
