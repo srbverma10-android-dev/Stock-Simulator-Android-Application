@@ -9,29 +9,42 @@ import com.sourabhverma.stocksimulator.base.BaseAdapter
 import com.sourabhverma.stocksimulator.ui.LineChart
 import com.sourabhverma.stocksimulator.utils.CommonUtils
 import org.json.JSONArray
+import org.json.JSONObject
 
 class NiftyAdapter : BaseAdapter() {
 
     private var listOfData : JSONArray = JSONArray()
     private lateinit var context : Context
 
-    fun setData(list : JSONArray, context: Context){
-        this.listOfData = list
+    fun addJsonObject(jsonObject: JSONObject){
+        this.listOfData.put(jsonObject)
+    }
+
+    fun setContext(context: Context){
         this.context = context
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
         holder as NiftyViewHolder
+        holder.setIsRecyclable(false)
         holder.indexName.text = listOfData.getJSONObject(position).getString("index")
         holder.currentVal.text = CommonUtils().changeToAmtIntWithRsIcon(listOfData.getJSONObject(position).getString("last"))
         val change = listOfData.getJSONObject(position).getString("percentChange") + "%"
         holder.changeVal.text = change
         holder.highVal.text = CommonUtils().changeToAmtIntWithRsIcon(listOfData.getJSONObject(position).getString("high"))
         holder.lowVal.text = CommonUtils().changeToAmtIntWithRsIcon(listOfData.getJSONObject(position).getString("low"))
-        holder.lineChart.setJson(CommonUtils().returnJsonArray())
+        holder.lineChart.setJson(filterArray(listOfData.getJSONObject(position).getJSONArray("graphData")))
     }
-    
+    private fun filterArray(array: JSONArray) : JSONArray{
+        val jsonArray = JSONArray()
+        for(i in 1 until array.length()){
+            if (i % 180 == 0 && array.getJSONArray(i-1).get(1).toString().toFloat() != array.getJSONArray(i).get(1).toString().toFloat()){
+                jsonArray.put(array.getJSONArray(i))
+            }
+        }
+        return jsonArray
+    }
     override fun getLayoutId(): List<Int> = listOf(R.layout.nifty_adapter)
 
     override fun getViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder {

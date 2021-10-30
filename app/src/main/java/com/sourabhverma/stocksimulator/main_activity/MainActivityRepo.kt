@@ -19,6 +19,7 @@ class MainActivityRepo {
     private val mExecutor: Executor = Executors.newSingleThreadExecutor()
 
     private val allIndUrl :String = "https://www.nseindia.com/api/allIndices"
+    private val graphData : String = "https://www.nseindia.com/api/chart-databyindex?index=[&&&]&indices=true"
 
     private fun createHttpTask(u:String): Task<String> {
         return Tasks.call(mExecutor, Callable {
@@ -43,32 +44,36 @@ class MainActivityRepo {
         })
     }
 
-    fun getIndices(onResult: (JSONObject?)->Unit){
+    fun getNiftyGraphData(name : String, onResult: (JSONObject?)->Unit){
+        createHttpTask(graphData.replace("[&&&]", name))
+            .addOnSuccessListener {
+                val json = JSONObject(it)
+                json.remove("identifier")
+                json.remove("closePrice")
+                onResult(json)
+            }
+            .addOnFailureListener {
+                onResult(null)
+            }
+    }
+    fun getIndices(onResult: (JSONArray?)->Unit){
         createHttpTask(allIndUrl)
             .addOnSuccessListener {
                 val json = JSONObject(it)
-                val removeDataHalf = listOf("timestamp", "advances", "declines", "unchanged", "dates", "date30dAgo", "date365dAgo")
-                for(r in removeDataHalf){
-                    json.remove(r)
-                }
                 val jsonArray = JSONArray()
                 val mainKey = listOf("NIFTY 50", "NIFTY NEXT 50", "NIFTY MIDCAP 50", "NIFTY MIDCAP 100", "NIFTY BANK", "NIFTY AUTO", "NIFTY IT", "NIFTY FINANCIAL SERVICES", "NIFTY MEDIA", "NIFTY PHARMA", "NIFTY HEALTHCARE INDEX")
                 for(i in 0 until json.getJSONArray("data").length()){
                     if (mainKey.contains(json.getJSONArray("data").getJSONObject(i).getString("index"))){
-                        val removeInData = listOf("indexSymbol", "yearHigh", "yearLow", "pe", "pb", "dy", "declines", "advances", "unchanged", "perChange365d", "date365dAgo", "chart365dPath", "date30dAgo", "perChange30d", "chart30dPath", "chartTodayPath", "previousDay","oneWeekAgo","oneMonthAgo","oneYearAgo")
+                        val removeInData = listOf("yearHigh", "yearLow", "pe", "pb", "dy", "declines", "advances", "unchanged", "perChange365d", "date365dAgo", "chart365dPath", "date30dAgo", "perChange30d", "chart30dPath", "chartTodayPath", "previousDay","oneWeekAgo","oneMonthAgo","oneYearAgo")
                         for (r in removeInData){
                             json.getJSONArray("data").getJSONObject(i).remove(r)
                         }
                         jsonArray.put(json.getJSONArray("data").getJSONObject(i))
                     }
                 }
-                json.remove("data")
-                json.put("data", jsonArray)
-                Log.d("REPOERROR", "getNifty50: success :- $json")
-                onResult(json)
+                onResult(jsonArray)
             }
             .addOnFailureListener {
-                Log.d("REPOERROR", "getNifty50: error :- $it")
                 onResult(null)
             }
     }

@@ -225,6 +225,7 @@
         android:layout_height="100dp"
 
         android:layout_marginTop="@dimen/d_8"
+        android:background="@null"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

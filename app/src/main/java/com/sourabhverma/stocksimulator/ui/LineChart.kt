@@ -13,21 +13,20 @@ class LineChart @JvmOverloads constructor(
     defStyle: Int = 0
 ) : View(context, attrs, defStyle){
 
-    var path : Path = Path()
+    private var path : Path = Path()
+    private var pathForShadow : Path = Path()
     private var linePaint: Paint = Paint()
-    private var effect = CornerPathEffect(20f)
+    private var effect = CornerPathEffect(48f)
 
     private lateinit var jsonArray: JSONArray
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         linePaint.flags = Paint.ANTI_ALIAS_FLAG
-        linePaint.color = Color.parseColor("#FFE7E0C9")
         linePaint.style = Paint.Style.STROKE
-        linePaint.strokeWidth = 8f
         linePaint.strokeCap = Paint.Cap.ROUND
 
-        val spaceX = width/(jsonArray.length()+1)
+        val spaceX = (width.toFloat()/(jsonArray.length()+1).toFloat())
         var min = Float.MAX_VALUE
         var max = 0f
 
@@ -39,22 +38,31 @@ class LineChart @JvmOverloads constructor(
                 max = jsonArray.getJSONArray(i).get(1).toString().toFloat()
             }
         }
-
-        var x = spaceX.toFloat()
+        var x = spaceX
         var y = abs(height- normalize(jsonArray.getJSONArray(0).get(1).toString().toFloat(), max,min))
 
         path.moveTo(x,y)
+        pathForShadow.moveTo(x, y)
         for (i in 1 until jsonArray.length()){
             x += spaceX
             y = normalize(jsonArray.getJSONArray(i).get(1).toString().toFloat(), max, min)
             path.lineTo(x, height-y)
+            pathForShadow.lineTo(x, height-y+8f)
         }
         linePaint.pathEffect = effect
+        linePaint.strokeWidth = 12f
+        linePaint.color = Color.parseColor("#992C3E50")
+        canvas?.drawPath(pathForShadow, linePaint)
+        linePaint.color = Color.parseColor("#FFE7E0C9")
+        linePaint.strokeWidth = 8f
         canvas?.drawPath(path, linePaint)
+
     }
 
     private fun normalize(value : Float, max : Float, min : Float) : Float{
-        return (height * ((value-min)/(max-min)))
+        val newMax = height-27f
+        val newMin = 27f
+        return ((value - min) / (max - min) ) * (newMax - newMin) + newMin
     }
 
     fun setJson(array : JSONArray){
