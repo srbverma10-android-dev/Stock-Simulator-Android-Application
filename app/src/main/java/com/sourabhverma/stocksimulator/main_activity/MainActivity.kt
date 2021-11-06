@@ -11,9 +11,11 @@ import androidx.core.text.buildSpannedString
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.SnapHelper
+import androidx.room.Room
 import com.google.android.material.snackbar.Snackbar
 import com.sourabhverma.stocksimulator.R
 import com.sourabhverma.stocksimulator.base.BaseActivity
+import com.sourabhverma.stocksimulator.data.AppDatabase
 import com.sourabhverma.stocksimulator.databinding.ActivityMainBinding
 import com.sourabhverma.stocksimulator.ui.PageIndicator
 import com.sourabhverma.stocksimulator.utils.CacheHelperClass
@@ -49,9 +51,21 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
     }
 
     private fun getData(){
+        val db = Room.databaseBuilder(
+            this@MainActivity,
+            AppDatabase::class.java, "INDICES"
+        ).build()
+        val indicesDAO = db.indicesDao()
+
         for (str in CommonUtils().getIndicesSymbol()){
-            viewModel.getIndices(str)
+            viewModel.getIndices(str, indicesDAO)
         }
+        indicesDAO.getAll().observe(this@MainActivity, {
+            niftyAdapter.setData(it.sortedBy { it2->
+                it2.uid
+            })
+            niftyAdapter.notifyDataSetChanged()
+        })
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -90,13 +104,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
         } else {
             binding.success.root.visibility = View.GONE
         }
-        viewModel.getIndicesOB().observe(this, {
-            if (it != null){
-                niftyAdapter.addJsonObject(it)
-                niftyAdapter.notifyDataSetChanged()
-            }
-        })
-
     }
 
 }

@@ -2,6 +2,10 @@ package com.sourabhverma.stocksimulator.main_activity
 
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
+import com.sourabhverma.stocksimulator.data.Indices
+import com.sourabhverma.stocksimulator.data.IndicesDAO
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.io.*
 import java.net.HttpURLConnection
@@ -57,13 +61,25 @@ class MainActivityRepo {
             return@Callable inp.bufferedReader(UTF_8).use { it.readText() }
         })
     }
-    fun getIndices(symbol : String, onResult: (JSONObject?)->Unit){
+
+    fun getIndices(symbol : String, indicesDAO: IndicesDAO){
         createHttpTask(allIndUrl, symbol, true)
             .addOnSuccessListener {
-                onResult(JSONObject(it))
+                val json = JSONObject(it)
+                GlobalScope.launch {
+                    indicesDAO.insert(Indices(change = json.getString("change").toDouble(),
+                        name = json.getString("name"),
+                        symbol = json.getString("symbol"),
+                        high = json.getString("high").toDouble(),
+                        low = json.getString("low").toDouble(),
+                        current = json.getString("current").toDouble(),
+                        graphData = json.getJSONArray("graphData").toString(),
+                        hasNext = json.getString("hasNext").toBoolean(),
+                        code = json.getString("code").toInt(),
+                        uid = json.getInt("uid")))
+                }
             }
             .addOnFailureListener {
-                onResult(null)
             }
     }
 

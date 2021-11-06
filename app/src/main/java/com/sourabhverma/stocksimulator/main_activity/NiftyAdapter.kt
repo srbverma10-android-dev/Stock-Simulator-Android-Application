@@ -6,18 +6,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sourabhverma.stocksimulator.R
 import com.sourabhverma.stocksimulator.base.BaseAdapter
+import com.sourabhverma.stocksimulator.data.Indices
 import com.sourabhverma.stocksimulator.ui.LineChart
 import com.sourabhverma.stocksimulator.utils.CommonUtils
 import org.json.JSONArray
-import org.json.JSONObject
 
 class NiftyAdapter : BaseAdapter() {
 
-    private var listOfData : JSONArray = JSONArray()
+    private var list : List<Indices> = mutableListOf()
     private lateinit var context : Context
 
-    fun addJsonObject(jsonObject: JSONObject){
-        this.listOfData.put(jsonObject)
+    fun setData(list : List<Indices>){
+        this.list = list
     }
 
     fun setContext(context: Context){
@@ -28,13 +28,13 @@ class NiftyAdapter : BaseAdapter() {
         super.onBindViewHolder(holder, position)
         holder as NiftyViewHolder
         holder.setIsRecyclable(false)
-        holder.indexName.text = listOfData.getJSONObject(position).getString("name")
-        holder.currentVal.text = CommonUtils().changeToAmtIntWithRsIcon(listOfData.getJSONObject(position).getString("current"))
-        val change = String.format("%.2f", listOfData.getJSONObject(position).getString("change").toDouble()).toDouble().toString() + "%"
+        holder.indexName.text = list[position].name
+        holder.currentVal.text = CommonUtils().changeToAmtIntWithRsIcon(list[position].current.toString())
+        val change = String.format("%.2f", list[position].change).toDouble().toString() + "%"
         holder.changeVal.text = change
-        holder.highVal.text = CommonUtils().changeToAmtIntWithRsIcon(listOfData.getJSONObject(position).getString("high"))
-        holder.lowVal.text = CommonUtils().changeToAmtIntWithRsIcon(listOfData.getJSONObject(position).getString("low"))
-        holder.lineChart.setArray(filterArray(listOfData.getJSONObject(position).getJSONArray("graphData")))
+        holder.highVal.text = CommonUtils().changeToAmtIntWithRsIcon(list[position].high.toString())
+        holder.lowVal.text = CommonUtils().changeToAmtIntWithRsIcon(list[position].low.toString())
+        holder.lineChart.setArray(filterArray(JSONArray(list[position].graphData)))
     }
     private fun filterArray(array: JSONArray) : MutableList<Float>{
         val jsonArray = mutableListOf<Float>()
@@ -51,7 +51,7 @@ class NiftyAdapter : BaseAdapter() {
         return NiftyViewHolder(view)
     }
 
-    override fun itemCount(): Int = listOfData.length()
+    override fun itemCount(): Int = list.size
 
     override fun getViewType(position: Int): Int {
         return 0
