@@ -63,6 +63,18 @@ class CommonUtils {
         return formatted
     }
 
+    fun getIndicesSymbol() : List<String>{
+        val listOfIndices = mutableListOf<String>()
+        listOfIndices.add("^NSEI")
+        listOfIndices.add("^CNX100")
+        listOfIndices.add("^NSMIDCP")
+        listOfIndices.add("^NSEMDCP50")
+        listOfIndices.add("^NSEBANK")
+        listOfIndices.add("^CNXAUTO")
+        listOfIndices.add("^CNXIT")
+        listOfIndices.add("NIFTY_HEALTHCARE.NS")
+        return listOfIndices
+    }
     fun changeToAmtInt(context: Context): String? {
         var str = SharedPrefManager().getCurrentAmount(context)
         return if (str?.length != null) {

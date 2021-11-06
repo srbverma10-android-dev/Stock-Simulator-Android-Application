@@ -1,11 +1,10 @@
 package com.sourabhverma.stocksimulator.main_activity
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Spannable
 import android.text.style.ImageSpan
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
@@ -20,7 +19,6 @@ import com.sourabhverma.stocksimulator.ui.PageIndicator
 import com.sourabhverma.stocksimulator.utils.CacheHelperClass
 import com.sourabhverma.stocksimulator.utils.CommonUtils
 import com.sourabhverma.stocksimulator.utils.SharedPrefManager
-import org.json.JSONArray
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() {
 
@@ -32,7 +30,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
 
     private var niftyAdapter: NiftyAdapter = NiftyAdapter()
     private lateinit var lm : LinearLayoutManager
-    private var jsonArray = JSONArray()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,35 +46,17 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
             addItemDecoration(itemDecoration)
         }
         snapHelper.attachToRecyclerView(binding.recyclerViewNifty)
-        viewModel.getGraphDataOB().observe(this@MainActivity, {it2->
-            if (it2 != null) {
-                for (i in 0 until jsonArray.length()){
-                    if (jsonArray.getJSONObject(i).getString("indexSymbol") == it2.getString("name")){
-                        val jsonObject = jsonArray.getJSONObject(i)
-                        jsonObject.put("graphData", it2.getJSONArray("grapthData"))
-                        niftyAdapter.addJsonObject(jsonObject)
-                        niftyAdapter.notifyItemInserted(niftyAdapter.itemCount)
-                    }
-                }
-            }
-        })
     }
 
     private fun getData(){
-        viewModel.getIndices().observe(this, {it1->
-            if (it1 != null){
-                for (i in 0 until it1.length()){
-                    viewModel.getGraphData(it1.getJSONObject(i).getString("indexSymbol"))
-                    jsonArray.put(it1.getJSONObject(i))
-                }
-
-            } else {
-                Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show()
-            }
-        })
+        for (str in CommonUtils().getIndicesSymbol()){
+            viewModel.getIndices(str)
+        }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun setData() {
+        niftyAdapter.setContext(this)
         binding.userName.text = SharedPrefManager().getUsername(this)
         if (SharedPrefManager().getShouldShowFirstSuccessCard(this)) {
             binding.success.root.visibility = View.VISIBLE
@@ -111,6 +90,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
         } else {
             binding.success.root.visibility = View.GONE
         }
+        viewModel.getIndicesOB().observe(this, {
+            if (it != null){
+                niftyAdapter.addJsonObject(it)
+                niftyAdapter.notifyDataSetChanged()
+            }
+        })
+
     }
 
 }

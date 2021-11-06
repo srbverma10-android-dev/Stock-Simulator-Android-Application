@@ -28,19 +28,19 @@ class NiftyAdapter : BaseAdapter() {
         super.onBindViewHolder(holder, position)
         holder as NiftyViewHolder
         holder.setIsRecyclable(false)
-        holder.indexName.text = listOfData.getJSONObject(position).getString("index")
-        holder.currentVal.text = CommonUtils().changeToAmtIntWithRsIcon(listOfData.getJSONObject(position).getString("last"))
-        val change = listOfData.getJSONObject(position).getString("percentChange") + "%"
-        holder.changeVal.text = change
+        holder.indexName.text = listOfData.getJSONObject(position).getString("name")
+        holder.currentVal.text = CommonUtils().changeToAmtIntWithRsIcon(listOfData.getJSONObject(position).getString("current"))
+//        val change = listOfData.getJSONObject(position).getString("percentChange") + "%"
+//        holder.changeVal.text = change
         holder.highVal.text = CommonUtils().changeToAmtIntWithRsIcon(listOfData.getJSONObject(position).getString("high"))
         holder.lowVal.text = CommonUtils().changeToAmtIntWithRsIcon(listOfData.getJSONObject(position).getString("low"))
-        holder.lineChart.setJson(filterArray(listOfData.getJSONObject(position).getJSONArray("graphData")))
+        holder.lineChart.setArray(filterArray(listOfData.getJSONObject(position).getJSONArray("graphData")))
     }
-    private fun filterArray(array: JSONArray) : JSONArray{
-        val jsonArray = JSONArray()
+    private fun filterArray(array: JSONArray) : MutableList<Float>{
+        val jsonArray = mutableListOf<Float>()
         for(i in 1 until array.length()){
-            if (i % 180 == 0 && array.getJSONArray(i-1).get(1).toString().toFloat() != array.getJSONArray(i).get(1).toString().toFloat()){
-                jsonArray.put(array.getJSONArray(i))
+            if (array.get(i-1).toString().toFloat() != array.get(i).toString().toFloat()){
+                jsonArray.add(array.get(i).toString().toFloat())
             }
         }
         return jsonArray

@@ -1,40 +1,54 @@
 package com.sourabhverma.stocksimulator.main_activity
 
-import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
-import org.json.JSONArray
 import org.json.JSONObject
-import java.io.BufferedInputStream
-import java.io.InputStream
+import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
 import java.nio.charset.StandardCharsets.UTF_8
+import java.util.*
 import java.util.concurrent.Callable
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
+import kotlin.collections.HashMap
 
 class MainActivityRepo {
 
     private val mExecutor: Executor = Executors.newSingleThreadExecutor()
 
-    private val allIndUrl :String = "https://www.nseindia.com/api/allIndices"
-    private val graphData : String = "https://www.nseindia.com/api/chart-databyindex?index=[&&&]&indices=true"
+    private val allIndUrl :String = "http://13.126.15.138:8000/dev/indices"
 
-    private fun createHttpTask(u:String): Task<String> {
+    private fun createHttpTask(u:String, jsonObjectString : String? = null, isPost : Boolean = false): Task<String> {
         return Tasks.call(mExecutor, Callable {
             val url = URL(u)
             val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
-            conn.requestMethod = "GET"
+            conn.doOutput = true
+            if (!isPost) {
+                conn.requestMethod = "GET"
+            } else {
+                conn.requestMethod = "POST"
+            }
             conn.connectTimeout = 30000
             conn.readTimeout = 30000
             val headers: MutableMap<String, String> = HashMap()
-            headers["X-CSRF-Token"] = "fetch"
-            headers["content-type"] = "application/json"
-            headers["user-agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+            headers["content-type"] = "multipart/form-data; boundary=" + UUID.randomUUID().toString()
+            headers["accept"] = "*/*"
             for (headerKey in headers.keys) {
                 conn.setRequestProperty(headerKey, headers[headerKey])
             }
+            val os: OutputStream = conn.outputStream
+            val osw = OutputStreamWriter(os, "UTF-8")
+
+            osw.append("--" + UUID.randomUUID().toString()).append("\r\n")
+            osw.append("Content-Disposition: form-data; name=\"" + "symbol" + "\"").append("\r\n")
+            osw.append("Content-Type: text/plain; charset=" + "utf-8").append("\r\n")
+            osw.append("\r\n")
+            osw.append(jsonObjectString?.trim()).append("\r\n")
+            osw.flush()
+            osw.close()
+            os.close()
+            conn.connect()
             val rc = conn.responseCode
             if (rc != HttpURLConnection.HTTP_OK) {
                 throw Exception("Error: $rc")
@@ -43,35 +57,10 @@ class MainActivityRepo {
             return@Callable inp.bufferedReader(UTF_8).use { it.readText() }
         })
     }
-
-    fun getNiftyGraphData(name : String, onResult: (JSONObject?)->Unit){
-        createHttpTask(graphData.replace("[&&&]", name))
+    fun getIndices(symbol : String, onResult: (JSONObject?)->Unit){
+        createHttpTask(allIndUrl, symbol, true)
             .addOnSuccessListener {
-                val json = JSONObject(it)
-                json.remove("identifier")
-                json.remove("closePrice")
-                onResult(json)
-            }
-            .addOnFailureListener {
-                onResult(null)
-            }
-    }
-    fun getIndices(onResult: (JSONArray?)->Unit){
-        createHttpTask(allIndUrl)
-            .addOnSuccessListener {
-                val json = JSONObject(it)
-                val jsonArray = JSONArray()
-                val mainKey = listOf("NIFTY 50", "NIFTY NEXT 50", "NIFTY MIDCAP 50", "NIFTY MIDCAP 100", "NIFTY BANK", "NIFTY AUTO", "NIFTY IT", "NIFTY FINANCIAL SERVICES", "NIFTY MEDIA", "NIFTY PHARMA", "NIFTY HEALTHCARE INDEX")
-                for(i in 0 until json.getJSONArray("data").length()){
-                    if (mainKey.contains(json.getJSONArray("data").getJSONObject(i).getString("index"))){
-                        val removeInData = listOf("yearHigh", "yearLow", "pe", "pb", "dy", "declines", "advances", "unchanged", "perChange365d", "date365dAgo", "chart365dPath", "date30dAgo", "perChange30d", "chart30dPath", "chartTodayPath", "previousDay","oneWeekAgo","oneMonthAgo","oneYearAgo")
-                        for (r in removeInData){
-                            json.getJSONArray("data").getJSONObject(i).remove(r)
-                        }
-                        jsonArray.put(json.getJSONArray("data").getJSONObject(i))
-                    }
-                }
-                onResult(jsonArray)
+                onResult(JSONObject(it))
             }
             .addOnFailureListener {
                 onResult(null)
