@@ -5,6 +5,8 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.text.TextUtils
 import android.util.Patterns
+import java.text.NumberFormat
+import java.util.*
 
 class CommonUtils {
 
@@ -49,18 +51,9 @@ class CommonUtils {
         return !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches()
     }
 
-    fun changeToAmtIntWithRsIcon(string: String) : String {
-        var str = string
-        var formatted = "₹ "
-        if (str.length > 1) {
-            formatted = "₹ " + str.substring(0, 1)
-            str = str.substring(1)
-        }
-        while (str.length > 3) {
-            formatted += "," + str.substring(0, 2)
-            str = str.substring(2)
-        }
-        return formatted
+    fun changeToAmtIntWithRsIcon(string: String): String {
+        val formatter: NumberFormat = NumberFormat.getCurrencyInstance(Locale("en", "IN"))
+        return formatter.format(string.toFloat())
     }
 
     fun getIndicesSymbol() : List<String>{

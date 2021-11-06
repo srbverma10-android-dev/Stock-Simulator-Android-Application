@@ -30,8 +30,8 @@ class NiftyAdapter : BaseAdapter() {
         holder.setIsRecyclable(false)
         holder.indexName.text = listOfData.getJSONObject(position).getString("name")
         holder.currentVal.text = CommonUtils().changeToAmtIntWithRsIcon(listOfData.getJSONObject(position).getString("current"))
-//        val change = listOfData.getJSONObject(position).getString("percentChange") + "%"
-//        holder.changeVal.text = change
+        val change = String.format("%.2f", listOfData.getJSONObject(position).getString("change").toDouble()).toDouble().toString() + "%"
+        holder.changeVal.text = change
         holder.highVal.text = CommonUtils().changeToAmtIntWithRsIcon(listOfData.getJSONObject(position).getString("high"))
         holder.lowVal.text = CommonUtils().changeToAmtIntWithRsIcon(listOfData.getJSONObject(position).getString("low"))
         holder.lineChart.setArray(filterArray(listOfData.getJSONObject(position).getJSONArray("graphData")))
