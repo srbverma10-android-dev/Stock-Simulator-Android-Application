@@ -2,6 +2,7 @@ package com.sourabhverma.stocksimulator.main_activity
 
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
+import com.sourabhverma.stocksimulator.BuildConfig
 import com.sourabhverma.stocksimulator.data.Indices
 import com.sourabhverma.stocksimulator.data.IndicesDAO
 import kotlinx.coroutines.GlobalScope
@@ -21,7 +22,7 @@ class MainActivityRepo {
 
     private val mExecutor: Executor = Executors.newSingleThreadExecutor()
 
-    private val allIndUrl :String = "http://13.126.15.138:8000/dev/indices"
+    private val allIndUrl :String = BuildConfig.REST_HOST + "indices"
 
     private fun createHttpTask(u:String, jsonObjectString : String? = null, isPost : Boolean = false): Task<String> {
         return Tasks.call(mExecutor, Callable {
