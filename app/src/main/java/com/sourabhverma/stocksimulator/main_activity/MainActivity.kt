@@ -60,6 +60,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
         for (str in CommonUtils().getIndicesSymbol()){
             viewModel.getIndices(str, indicesDAO)
         }
+        viewModel.getBhavCopy(indicesDAO)
         indicesDAO.getAll().observe(this@MainActivity, {
             niftyAdapter.setData(it.sortedBy { it2->
                 it2.uid

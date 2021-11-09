@@ -3,6 +3,7 @@ package com.sourabhverma.stocksimulator.main_activity
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.sourabhverma.stocksimulator.BuildConfig
+import com.sourabhverma.stocksimulator.data.BhavCopy
 import com.sourabhverma.stocksimulator.data.Indices
 import com.sourabhverma.stocksimulator.data.IndicesDAO
 import kotlinx.coroutines.GlobalScope
@@ -23,6 +24,7 @@ class MainActivityRepo {
     private val mExecutor: Executor = Executors.newSingleThreadExecutor()
 
     private val allIndUrl :String = BuildConfig.REST_HOST + "indices"
+    private val bhavCopyUrl :String = BuildConfig.REST_HOST + "bhavcopy"
 
     private fun createHttpTask(u:String, jsonObjectString : String? = null, isPost : Boolean = false): Task<String> {
         return Tasks.call(mExecutor, Callable {
@@ -68,7 +70,7 @@ class MainActivityRepo {
             .addOnSuccessListener {
                 val json = JSONObject(it)
                 GlobalScope.launch {
-                    indicesDAO.insert(Indices(change = json.getString("change").toDouble(),
+                    indicesDAO.insertIndices(Indices(change = json.getString("change").toDouble(),
                         name = json.getString("name"),
                         symbol = json.getString("symbol"),
                         high = json.getString("high").toDouble(),
@@ -84,4 +86,20 @@ class MainActivityRepo {
             }
     }
 
+    fun getBhavCopy(indicesDAO: IndicesDAO){
+        createHttpTask(bhavCopyUrl, isPost = true)
+            .addOnSuccessListener {
+                val json = JSONObject(it)
+                GlobalScope.launch {
+                    indicesDAO.insertBhavCopy(BhavCopy(id = 1, code = json.getInt("code"), hasNext = json.getBoolean("hasNext"),
+                            most_traded = json.getString("most_traded"),
+                            top_gainer = json.getString("top_gainer"),
+                            top_looser = json.getString("top_looser")
+                    ))
+                }
+
+            }
+            .addOnFailureListener {
+            }
+    }
 }

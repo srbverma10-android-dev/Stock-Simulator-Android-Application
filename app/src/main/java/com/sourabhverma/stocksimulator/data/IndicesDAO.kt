@@ -9,7 +9,9 @@ import androidx.room.Query
 @Dao
 interface IndicesDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(indices: Indices?)
+    fun insertIndices(indices: Indices?)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertBhavCopy(bhavCopy: BhavCopy?)
     @Query("SELECT * FROM Indices")
     fun getAll(): LiveData<List<Indices>>
 }
