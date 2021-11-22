@@ -38,4 +38,7 @@
     <string name="change_text">Change : </string>
     <string name="high">High : </string>
     <string name="low">Low : </string>
+    <string name="top_gainer">Top Gainer</string>
+    <string name="top_looser">Top Looser</string>
+    <string name="most_Active">Most Active</string>
 </resources>

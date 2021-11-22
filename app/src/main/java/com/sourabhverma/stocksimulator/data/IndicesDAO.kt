@@ -13,5 +13,7 @@ interface IndicesDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertBhavCopy(bhavCopy: BhavCopy?)
     @Query("SELECT * FROM Indices")
-    fun getAll(): LiveData<List<Indices>>
+    fun getAllIndices(): LiveData<List<Indices>>
+    @Query("SELECT * FROM BhavCopy")
+    fun getAllBhavCopy(): LiveData<BhavCopy>
 }

@@ -21,6 +21,8 @@ import com.sourabhverma.stocksimulator.ui.PageIndicator
 import com.sourabhverma.stocksimulator.utils.CacheHelperClass
 import com.sourabhverma.stocksimulator.utils.CommonUtils
 import com.sourabhverma.stocksimulator.utils.SharedPrefManager
+import org.json.JSONArray
+import org.json.JSONObject
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() {
 
@@ -31,6 +33,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
     override fun getFileName(): String = "MAIN-ACTIVITY"
 
     private var niftyAdapter: NiftyAdapter = NiftyAdapter()
+    private var topGainerAdapter: TopGainerAdapter = TopGainerAdapter()
+    private var topLooserAdapter : TopLooserAdapter = TopLooserAdapter()
+    private var mostActiveAdapter : MostActiveAdapter = MostActiveAdapter()
     private lateinit var lm : LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +52,18 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
             adapter = niftyAdapter
             addItemDecoration(itemDecoration)
         }
+        binding.topGainerRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
+            adapter = topGainerAdapter
+        }
+        binding.topLooserRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
+            adapter = topLooserAdapter
+        }
+        binding.mostActiveRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
+            adapter = mostActiveAdapter
+        }
         snapHelper.attachToRecyclerView(binding.recyclerViewNifty)
     }
 
@@ -61,11 +78,40 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
             viewModel.getIndices(str, indicesDAO)
         }
         viewModel.getBhavCopy(indicesDAO)
-        indicesDAO.getAll().observe(this@MainActivity, {
+        indicesDAO.getAllIndices().observe(this@MainActivity, {
             niftyAdapter.setData(it.sortedBy { it2->
                 it2.uid
             })
             niftyAdapter.notifyDataSetChanged()
+        })
+        indicesDAO.getAllBhavCopy().observe(this@MainActivity, {
+            if (it?.top_gainer != null) {
+                val json = JSONObject(it.top_gainer)
+                val listOfArray = mutableListOf<JSONArray>()
+                listOfArray.add(json.getJSONArray("SYMBOL"))
+                listOfArray.add(json.getJSONArray("CLOSE"))
+                listOfArray.add(json.getJSONArray("CHANGE"))
+                topGainerAdapter.setData(listOfArray)
+                topGainerAdapter.notifyDataSetChanged()
+            }
+            if (it?.top_looser != null){
+                val json = JSONObject(it.top_looser)
+                val listOfArray = mutableListOf<JSONArray>()
+                listOfArray.add(json.getJSONArray("SYMBOL"))
+                listOfArray.add(json.getJSONArray("CLOSE"))
+                listOfArray.add(json.getJSONArray("CHANGE"))
+                topLooserAdapter.setData(listOfArray)
+                topLooserAdapter.notifyDataSetChanged()
+            }
+            if (it?.most_traded != null){
+                val json = JSONObject(it.most_traded)
+                val listOfArray = mutableListOf<JSONArray>()
+                listOfArray.add(json.getJSONArray("SYMBOL"))
+                listOfArray.add(json.getJSONArray("CLOSE"))
+                listOfArray.add(json.getJSONArray("CHANGE"))
+                mostActiveAdapter.setData(listOfArray)
+                mostActiveAdapter.notifyDataSetChanged()
+            }
         })
     }
 
