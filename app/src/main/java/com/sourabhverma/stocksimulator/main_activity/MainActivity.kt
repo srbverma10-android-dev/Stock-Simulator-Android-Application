@@ -32,6 +32,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
 
     override fun getFileName(): String = "MAIN-ACTIVITY"
 
+    private val shakePhoneForReportDialog : ShakePhoneForReportDialog = ShakePhoneForReportDialog()
+
     private var niftyAdapter: NiftyAdapter = NiftyAdapter()
     private var topGainerAdapter: TopGainerAdapter = TopGainerAdapter()
     private var topLooserAdapter : TopLooserAdapter = TopLooserAdapter()
@@ -123,6 +125,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
         niftyAdapter.setContext(this)
         binding.userName.text = SharedPrefManager().getUsername(this)
         if (SharedPrefManager().getShouldShowFirstSuccessCard(this)) {
+            shakePhoneForReportDialog.show(supportFragmentManager, CommonUtils().reportDialogTag())
             binding.success.root.visibility = View.VISIBLE
             binding.success.congratsText.text = buildSpannedString {
                 append(getString(R.string.congrats_text1, CommonUtils().changeToAmtInt(this@MainActivity)))

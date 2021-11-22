@@ -41,4 +41,5 @@
     <string name="top_gainer">Top Gainer</string>
     <string name="top_looser">Top Looser</string>
     <string name="most_Active">Most Active</string>
+    <string name="shake_phone_dialog_txt">Shake your phone to report a bug,\nsuggest an improvement or for any query.</string>
 </resources>
