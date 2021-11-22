@@ -86,6 +86,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
         })
         indicesDAO.getAllBhavCopy().observe(this@MainActivity, {
             if (it?.top_gainer != null) {
+                binding.topGainerTextView.visibility = View.VISIBLE
                 val json = JSONObject(it.top_gainer)
                 val listOfArray = mutableListOf<JSONArray>()
                 listOfArray.add(json.getJSONArray("SYMBOL"))
@@ -95,6 +96,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
                 topGainerAdapter.notifyDataSetChanged()
             }
             if (it?.top_looser != null){
+                binding.topLooserTextView.visibility = View.VISIBLE
                 val json = JSONObject(it.top_looser)
                 val listOfArray = mutableListOf<JSONArray>()
                 listOfArray.add(json.getJSONArray("SYMBOL"))
@@ -104,6 +106,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
                 topLooserAdapter.notifyDataSetChanged()
             }
             if (it?.most_traded != null){
+                binding.mostActiveTextView.visibility = View.VISIBLE
                 val json = JSONObject(it.most_traded)
                 val listOfArray = mutableListOf<JSONArray>()
                 listOfArray.add(json.getJSONArray("SYMBOL"))

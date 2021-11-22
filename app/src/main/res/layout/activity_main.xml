@@ -139,6 +139,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
+                android:visibility="gone"
+
                 android:text="@string/top_gainer"
                 android:textColor="@color/white"
                 android:textSize="@dimen/s_20"
@@ -165,6 +167,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
+                android:visibility="gone"
+
                 android:text="@string/top_looser"
                 android:textColor="@color/white"
                 android:textSize="@dimen/s_20"
@@ -190,6 +194,8 @@
                 android:id="@+id/most_Active_TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:visibility="gone"
 
                 android:text="@string/most_Active"
                 android:textColor="@color/white"

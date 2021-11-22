@@ -6,7 +6,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sourabhverma.stocksimulator.R
 import com.sourabhverma.stocksimulator.base.BaseAdapter
+import com.sourabhverma.stocksimulator.utils.CommonUtils
 import org.json.JSONArray
+import java.math.BigDecimal
 
 
 class TopGainerAdapter : BaseAdapter() {
@@ -32,8 +34,9 @@ class TopGainerAdapter : BaseAdapter() {
         super.onBindViewHolder(holder, position)
         holder as TopGainerViewHolder
         holder.symbol.text = list[0].get(position).toString()
-        holder.close.text = list[1].get(position).toString()
-        holder.change.text = list[2].get(position).toString()
+        holder.close.text = CommonUtils().changeToAmtIntWithRsIcon(list[1].get(position).toString())
+        val changeToShow = "(${list[2].get(position).toString().toBigDecimal().setScale(2, BigDecimal.ROUND_UP)}%)"
+        holder.change.text = changeToShow
     }
 
     override fun itemCount(): Int = list.size
