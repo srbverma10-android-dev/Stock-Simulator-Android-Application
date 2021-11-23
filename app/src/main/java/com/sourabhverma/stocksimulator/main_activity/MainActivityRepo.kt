@@ -1,7 +1,10 @@
 package com.sourabhverma.stocksimulator.main_activity
 
+import android.view.View
+import android.widget.ProgressBar
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
+import com.google.android.material.snackbar.Snackbar
 import com.sourabhverma.stocksimulator.BuildConfig
 import com.sourabhverma.stocksimulator.data.BhavCopy
 import com.sourabhverma.stocksimulator.data.Indices
@@ -86,9 +89,13 @@ class MainActivityRepo {
             }
     }
 
-    fun getBhavCopy(indicesDAO: IndicesDAO){
+    fun getBhavCopy(indicesDAO: IndicesDAO, progressHorizontal: ProgressBar, root: View){
         createHttpTask(bhavCopyUrl, isPost = true)
             .addOnSuccessListener {
+
+                progressHorizontal.visibility = View.GONE
+                Snackbar.make(root, "Data Updated...", Snackbar.LENGTH_SHORT).show()
+
                 val json = JSONObject(it)
                 GlobalScope.launch {
                     indicesDAO.insertBhavCopy(BhavCopy(id = 1, code = json.getInt("code"), hasNext = json.getBoolean("hasNext"),

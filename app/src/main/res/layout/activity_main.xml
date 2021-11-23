@@ -14,6 +14,19 @@
             android:layout_height="match_parent"
             >
 
+            <ProgressBar
+                android:id="@+id/progress_horizontal"
+
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+
+                android:indeterminate="true"
+
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
             <com.sourabhverma.stocksimulator.ui.RoundCornersImageView
                 android:id="@+id/profile_image"
 
@@ -46,25 +59,7 @@
 
                 app:layout_constraintTop_toTopOf="@id/profile_image"
                 app:layout_constraintStart_toEndOf="@id/profile_image"
-                app:layout_constraintBottom_toTopOf="@id/is_market_live"
-
-                android:layout_marginStart="@dimen/d_8"
-                />
-
-            <TextView
-                android:id="@+id/is_market_live"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text="@string/market_is_live"
-                android:textAlignment="textStart"
-                android:textSize="@dimen/s_14"
-                android:fontFamily="@font/semi_cond_semibold"
-                android:textColor="@color/white"
-
-                app:layout_constraintStart_toEndOf="@id/profile_image"
-                app:layout_constraintTop_toBottomOf="@id/user_name"
+                app:layout_constraintBottom_toBottomOf="@id/profile_image"
 
                 android:layout_marginStart="@dimen/d_8"
                 />
@@ -86,7 +81,7 @@
                 android:scaleType="centerInside"
                 app:layout_constraintEnd_toStartOf="@id/transaction"
                 app:layout_constraintTop_toTopOf="@id/user_name"
-                app:layout_constraintBottom_toBottomOf="@id/is_market_live"/>
+                app:layout_constraintBottom_toBottomOf="@id/user_name"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/transaction"
@@ -105,7 +100,7 @@
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/user_name"
-                app:layout_constraintBottom_toBottomOf="@id/is_market_live"/>
+                app:layout_constraintBottom_toBottomOf="@id/user_name"/>
 
             <include
                 android:id="@+id/success"
@@ -127,6 +122,8 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:overScrollMode="never"
 
                 app:layout_constraintTop_toBottomOf="@id/success"
                 app:layout_constraintStart_toStartOf="parent"
@@ -157,6 +154,9 @@
                 android:id="@+id/top_Gainer_Recycler_View"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:overScrollMode="never"
+
                 app:layout_constraintTop_toBottomOf="@id/top_Gainer_TextView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -185,6 +185,9 @@
                 android:id="@+id/top_Looser_Recycler_View"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:overScrollMode="never"
+
                 app:layout_constraintTop_toBottomOf="@id/top_Looser_TextView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -213,6 +216,9 @@
                 android:id="@+id/mostActive_Recycler_View"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:overScrollMode="never"
+
                 app:layout_constraintTop_toBottomOf="@id/most_Active_TextView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
